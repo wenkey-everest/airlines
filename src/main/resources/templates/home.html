@@ -8,7 +8,7 @@
 
 <body>
     <h1>Airline application</h1>
-    <form>
+    <form action="#" th:action="@{/search}" th:object="${searchForm}" method="post">
         <input id="from" name="from" required="required" />
         <input id="to" name="to" required="required" />
 
