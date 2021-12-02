@@ -12,6 +12,8 @@
         <th>Number</th>
         <th>From</th>
         <th>To</th>
+        <th>Departure Date</th>
+        <th>Arrival Date</th>
         <tr th:each="flight:${flights}">
             <td th:text="${flight.number}"></td>
             <td th:text="${flight.source}"></td>
