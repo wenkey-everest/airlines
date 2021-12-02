@@ -11,10 +11,12 @@ public class Flight {
     private LocalDate departureDate;
     private LocalDate arrivalDate;
 
-    public Flight(long number, String source, String destination) {
+    public Flight(long number, String source, String destination,  LocalDate departureDate, LocalDate arrivalDate) {
         this.number = number;
         this.source = source;
         this.destination = destination;
+        this.departureDate= departureDate;
+        this.arrivalDate=arrivalDate;
 
     }
 
@@ -30,5 +32,12 @@ public class Flight {
         return destination;
     }
 
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
+
+    public LocalDate getArrivalDate() {
+        return arrivalDate;
+    }
 
 }
