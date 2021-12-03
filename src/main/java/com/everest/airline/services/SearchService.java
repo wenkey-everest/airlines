@@ -16,7 +16,7 @@ public class SearchService {
         this.departureDate = departureDate;
     }
 
-    public List<Flight> SearchByPlace(){
+    public List<Flight> searchByPlace(){
         return Data.getFlights().parallelStream()
                 .filter(s->(s.getSource().equalsIgnoreCase(from) && s.getDestination().equalsIgnoreCase(to) && s.getDepartureDate().equals(LocalDate.parse(departureDate))))
                 .collect(Collectors.toList());
