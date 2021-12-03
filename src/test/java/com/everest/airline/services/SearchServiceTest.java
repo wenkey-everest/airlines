@@ -10,16 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class SearchServiceTest {
 
     @Test
-    public void searchDestinationTest(){
+    public void searchByDestinationTest(){
             SearchService searchService = new SearchService("Hyderabad","Bangalore", "2021-12-02");
-            for(int i=0;i<searchService.searchByPlace().size();i++)
-            assertTrue(searchService.searchByPlace().get(i).getDestination().equalsIgnoreCase("Bangalore"));
+            assertTrue(searchService.searchByFlight().get(0).getDestination().equalsIgnoreCase("Bangalore"));
     }
     @Test
-    public void searchDateTest(){
+    public void searchByDateTest(){
         SearchService searchService = new SearchService("Hyderabad","Bangalore", "2021-12-02");
-        for(int i=0;i<searchService.searchByPlace().size();i++)
-            assertEquals(searchService.searchByPlace().get(i).getDepartureDate(), LocalDate.parse("2021-12-02"));
+            assertEquals(searchService.searchByFlight().get(0).getDepartureDate(), LocalDate.parse("2021-12-02"));
     }
 
 }
