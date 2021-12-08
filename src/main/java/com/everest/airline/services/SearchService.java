@@ -20,9 +20,10 @@ public class SearchService {
                     .collect(Collectors.toList());
             flightList = new ArrayList<>();
             for (String[] strings : test2) {
-                flightList.add(new Flight(Long.parseLong(strings[0]), strings[1], strings[2], LocalDate.parse(strings[3]), LocalTime.parse(strings[4]), LocalDate.parse(strings[5]), LocalTime.parse(strings[6]), Integer.parseInt(strings[7])));
+                    if ((from.equalsIgnoreCase(strings[1])) && (to.equalsIgnoreCase(strings[2])))
+                        flightList.add(new Flight(Long.parseLong(strings[0]), strings[1], strings[2], LocalDate.parse(strings[3]), LocalTime.parse(strings[4]), LocalDate.parse(strings[5]), LocalTime.parse(strings[6]), Integer.parseInt(strings[7])));
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return flightList.parallelStream()

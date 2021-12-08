@@ -24,7 +24,16 @@ public class SearchController {
     public String search(String from, String to, Model model,String departureDate ) {
             List<Flight> flightList = searchService.searchByFlight(from,to,departureDate);
             searchService.bookTicket(flightList);
-            model.addAttribute("flights", flightList);
-        return "search";
+            if(flightList.size()>0) {
+                model.addAttribute("flights", flightList);
+                return "search";
+            }else {
+                try {
+                    throw new Exception("No flights with data from "+from+ " to "+to+" on "+departureDate);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return "noFlight";
+            }
     }
 }
