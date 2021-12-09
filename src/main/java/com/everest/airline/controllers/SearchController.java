@@ -1,6 +1,7 @@
 package com.everest.airline.controllers;
 
 import com.everest.airline.model.Flight;
+import com.everest.airline.services.BookTicketService;
 import com.everest.airline.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class SearchController {
     @RequestMapping(value = "/search")
     public String search(String from, String to, Model model,String departureDate ) {
             List<Flight> flightList = searchService.searchByFlight(from,to,departureDate);
-            searchService.bookTicket(flightList);
+            BookTicketService.bookTicket(flightList);
             if(flightList.size()>0) {
                 model.addAttribute("flights", flightList);
                 return "search";
