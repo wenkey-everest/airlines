@@ -17,6 +17,7 @@
         <th>Arrival Date</th>
         <th>Arrival Time</th>
         <th>Available Seats</th>
+        <th>Book Ticket</th>
         <tr th:each="flight:${flights}">
             <td th:text="${flight.number}"></td>
             <td th:text="${flight.source}"></td>
@@ -26,6 +27,7 @@
             <td th:text="${flight.arrivalDate}"></td>
             <td th:text="${flight.arrivalTime}"></td>
             <td th:text="${flight.availableSeats}"></td>
+            <td><a th:href = "@{'/' + ${flight.number}}">Book ticket</a></td>
         </tr>
     </table>
 </body>

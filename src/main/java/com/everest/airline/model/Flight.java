@@ -53,7 +53,6 @@ public class Flight {
     public LocalTime getArrivalTime() {
         return arrivalTime;
     }
-
     public int getAvailableSeats() {
         return availableSeats;
     }
