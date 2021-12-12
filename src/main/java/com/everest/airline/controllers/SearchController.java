@@ -32,6 +32,7 @@ public class SearchController {
     @RequestMapping(value = "/search")
     public String search(String from, String to, Model model,String departureDate) {
             flightList = searchService.test(from,to,departureDate);
+            BookTicketService.bookTicketTest(flightList);
             if(flightList.size()>0) {
                 model.addAttribute("flights", flightList);
                 return "search";
@@ -45,10 +46,4 @@ public class SearchController {
             }
     }
 
-    @RequestMapping(value = "/{number}")
-    public String book(@PathVariable("number") Long number, Model model){
-        BookTicketService.bookTicketTest(flightList);
-        model.addAttribute("flights", flightList);
-        return "search";
-    }
 }
