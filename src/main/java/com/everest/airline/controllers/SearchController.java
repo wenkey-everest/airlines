@@ -24,7 +24,7 @@ public class SearchController {
 
     @RequestMapping(value = "/")
     public String home() {
-       fileDivider.testFileDivider();
+//       fileDivider.testFileDivider();
         return "home";
     }
 

@@ -12,10 +12,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Component
 public class SearchService {
-   private List<Flight> flightList = new ArrayList<>();
+   private List<Flight> flightList;
     private BufferedReader bufferedReader = null;
 
     public List<Flight> searchByFlight(String from, String to, String departureDate) {
+        flightList= new ArrayList<>();
         if (DataParser.multiFileReader() != null)
             searchLogic(from, to, departureDate);
             return flightList.parallelStream()
@@ -23,9 +24,9 @@ public class SearchService {
                     .collect(Collectors.toList());
         }
 
-
         public void searchLogic(String from, String to, String departureDate){
             for (int i = 1; i < DataParser.multiFileReader().length; i++) {
+
                 if (DataParser.multiFileReader()[i].isFile()) {
                     try {
                         bufferedReader = new BufferedReader(new FileReader(DataParser.multiFileReader()[i]));
