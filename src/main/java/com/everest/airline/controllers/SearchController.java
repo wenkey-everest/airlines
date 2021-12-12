@@ -7,7 +7,6 @@ import com.everest.airline.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -32,7 +31,7 @@ public class SearchController {
     @RequestMapping(value = "/search")
     public String search(String from, String to, Model model,String departureDate) {
             flightList = searchService.test(from,to,departureDate);
-            BookTicketService.bookTicketTest(flightList);
+            BookTicketService.fileList(flightList);
             if(flightList.size()>0) {
                 model.addAttribute("flights", flightList);
                 return "search";
