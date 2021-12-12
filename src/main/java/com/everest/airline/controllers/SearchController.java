@@ -34,10 +34,12 @@ public class SearchController {
 
     @RequestMapping(value = "/search")
     public String search(String from, String to, Model model, String departureDate) {
-        this.from=from;
-        this.to=to;
-        this.departureDate=departureDate;
-        flightList = searchService.searchByFlight(from, to, departureDate);
+        if(from!=null) {
+            this.from = from;
+            this.to = to;
+            this.departureDate = departureDate;
+        }
+        flightList = searchService.searchByFlight(this.from, this.to, this.departureDate);
         if (flightList.size() > 0) {
             model.addAttribute("flights", flightList);
             return "search";
@@ -50,12 +52,12 @@ public class SearchController {
             return "noFlight";
         }
     }
+
     @RequestMapping(value = "/{number}")
     public String book(@PathVariable("number") Long number, Model model){
         flightList = searchService.searchByFlight(from, to, departureDate);
         BookTicketService.bookTicket(flightList);
         model.addAttribute("flights", flightList);
-        return "/search";
+        return "redirect:/search";
     }
-
 }
