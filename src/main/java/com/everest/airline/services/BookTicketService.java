@@ -1,5 +1,6 @@
 package com.everest.airline.services;
 
+import com.everest.airline.database.DataParser;
 import com.everest.airline.model.Flight;
 import java.io.*;
 import java.time.LocalDate;
@@ -8,17 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 public class BookTicketService {
  public static void bookTicketTest(List<Flight> flightList){
-        File dir = new File("/Volumes/everest/airlines_tdd/airlines/src/main/java/com/everest/airline/Flights");
-        File[] directoryListing = dir.listFiles();
+
         BufferedReader bufferedReader = null;
         BufferedWriter bufferedWriter = null;
         List<Flight> test=null;
-        if (directoryListing != null) {
+        if (DataParser.testData() != null) {
             test = new ArrayList<>();
-            for (int i = 1; i < directoryListing.length; i++) {
-                if (directoryListing[i].isFile()) {
+            for (int i = 1; i < DataParser.testData().length; i++) {
+                if (DataParser.testData()[i].isFile()) {
                     try {
-                        bufferedReader = new BufferedReader(new FileReader(directoryListing[i]));
+                        bufferedReader = new BufferedReader(new FileReader(DataParser.testData()[i]));
                         String line;
                         for (Flight flight : flightList) {
                             while ((line = bufferedReader.readLine()) != null) {
@@ -27,7 +27,7 @@ public class BookTicketService {
                                     line = line.replace(Integer.toString(flight.getAvailableSeats()), "" + (flight.getAvailableSeats() - 1));
                                     test.add(new Flight(Long.parseLong(strings[0]), strings[1], strings[2], LocalDate.parse(strings[3]), LocalTime.parse(strings[4]), LocalDate.parse(strings[5]), LocalTime.parse(strings[6]), Integer.parseInt(strings[7])));
                                 }
-                                bufferedWriter = new BufferedWriter(new FileWriter(directoryListing[i]));
+                                bufferedWriter = new BufferedWriter(new FileWriter(DataParser.testData()[i]));
                                 bufferedWriter.write(line);
                                 bufferedWriter.close();
                             }
