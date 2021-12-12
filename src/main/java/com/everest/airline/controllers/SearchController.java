@@ -24,13 +24,13 @@ public class SearchController {
 
     @RequestMapping(value = "/")
     public String home() {
-//        fileDivider.testFileDivider();
+       fileDivider.testFileDivider();
         return "home";
     }
 
     @RequestMapping(value = "/search")
     public String search(String from, String to, Model model,String departureDate) {
-            flightList = searchService.test(from,to,departureDate);
+            flightList = searchService.searchByFlight(from,to,departureDate);
             BookTicketService.fileList(flightList);
             if(flightList.size()>0) {
                 model.addAttribute("flights", flightList);

@@ -10,7 +10,7 @@ public class FileDivider {
     private FileWriter fw=null;
     public void testFileDivider(){
        try{
-           List<String> linesList =  DataParser.test().lines().collect(Collectors.toList());
+           List<String> linesList =  DataParser.singleFileReader().lines().collect(Collectors.toList());
            for(String line:linesList)
            {
                for (String filename : filenames) {
@@ -21,7 +21,7 @@ public class FileDivider {
                    }
                }
            }
-           DataParser.test().close();
+           DataParser.singleFileReader().close();
 
        }catch (IOException e) {
            e.printStackTrace();
