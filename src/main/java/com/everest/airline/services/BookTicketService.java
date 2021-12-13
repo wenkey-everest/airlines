@@ -9,39 +9,38 @@ import java.util.ArrayList;
 import java.util.List;
 public class BookTicketService {
 private static List<Flight> test;
-    public static void bookLogic(List<Flight> flightList, int i, String noOfPass) {
+    public static void bookLogic(int i, String noOfPass, Long number) {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(DataParser.multiFileReader()[i]));
             String line;
-            for (Flight flight : flightList) {
                 while ((line = bufferedReader.readLine()) != null) {
                     String[] strings = line.split(",", -1);
-                    if (strings[7].equals(Integer.toString(flight.getAvailableSeats())) && strings[1].equalsIgnoreCase(flight.getSource()) && strings[2].equalsIgnoreCase(flight.getDestination())) {
-                        line = line.replace(Integer.toString(flight.getAvailableSeats()), "" + (flight.getAvailableSeats() - Integer.parseInt(noOfPass)));
+                    if (number.equals(Long.parseLong(strings[0]))) {
+                        line = line.replace(strings[7], "" + (Integer.parseInt(strings[7]) - Integer.parseInt(noOfPass)));
                     }
                     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(DataParser.multiFileReader()[i]));
                     bufferedWriter.write(line);
                     bufferedWriter.close();
                 }
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    public static void bookTicket(List<Flight> flightList, String noOfPass) {
+    public static void bookTicket( String noOfPass, Long number) {
         if (DataParser.multiFileReader() != null) {
-            isContainFile(flightList, noOfPass);
+            isContainFile( noOfPass,number);
         }
 
     }
 
-    public static void isContainFile(List<Flight> flightList, String noOfPass) {
+    public static void isContainFile( String noOfPass, Long number) {
         for (int i = 1; i < DataParser.multiFileReader().length; i++) {
             if (DataParser.multiFileReader()[i].isFile()) {
-                bookLogic(flightList, i, noOfPass);
+                bookLogic( i, noOfPass, number);
             }
         }
     }
+
 }

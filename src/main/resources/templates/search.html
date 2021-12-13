@@ -17,6 +17,9 @@
         <th>Arrival Date</th>
         <th>Arrival Time</th>
         <th>Available Seats</th>
+        <th>Economic Seats</th>
+        <th>first Class Seats</th>
+        <th>secondClassSeats</th>
         <th>Number of Passengers</th>
         <th>Select Class</th>
         <th>Book Ticket</th>
@@ -29,6 +32,9 @@
             <td th:text="${flight.arrivalDate}"></td>
             <td th:text="${flight.arrivalTime}"></td>
             <td th:text="${flight.availableSeats}"></td>
+            <td th:text="${flight.economicSeats}"></td>
+            <td th:text="${flight.firstClassSeats}"></td>
+            <td th:text="${flight.secondClassSeats}"></td>
             <form th:action="@{'/' + ${flight.number}}" th:method="post">
                 <td><input type="number" min="0" id="noOfPass" name="noOfPass"/></td>
             <td><select name="flightClass" id="flightClass">

@@ -21,8 +21,6 @@ public class SearchController {
     private String to;
     private String departureDate;
 
-    public static List<Flight> flightList;
-
     @Autowired
     public FileDivider fileDivider;
 
@@ -39,7 +37,7 @@ public class SearchController {
             this.to = to;
             this.departureDate = departureDate;
         }
-        flightList = searchService.searchByFlight(this.from, this.to, this.departureDate);
+         List<Flight> flightList = searchService.searchByFlight(this.from, this.to, this.departureDate);
         if (flightList.size() > 0) {
             model.addAttribute("flights", flightList);
             return "search";
@@ -54,8 +52,18 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/{number}")
-    public String book(@PathVariable("number") Long number, Model model, String flightClass, String noOfPass){
-        BookTicketService.bookTicket(flightList, noOfPass);
-        return "redirect:/search";
+    public String book(@PathVariable("number") Long number, Model model, String flightClass, String noOfPass) {
+        if (noOfPass.isEmpty()) {
+            try {
+                throw new Exception("Please enter number of passengers");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return "noFlight";
+        } else {
+            BookTicketService.bookTicket(noOfPass, number);
+            return "redirect:/search";
+        }
     }
+
 }
