@@ -54,10 +54,8 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/{number}")
-    public String book(@PathVariable("number") Long number, Model model){
-        flightList = searchService.searchByFlight(from, to, departureDate);
-        BookTicketService.bookTicket(flightList);
-        model.addAttribute("flights", flightList);
+    public String book(@PathVariable("number") Long number, Model model, String flightClass, String noOfPass){
+        BookTicketService.bookTicket(flightList, noOfPass);
         return "redirect:/search";
     }
 }

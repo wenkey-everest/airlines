@@ -29,16 +29,16 @@
             <td th:text="${flight.arrivalDate}"></td>
             <td th:text="${flight.arrivalTime}"></td>
             <td th:text="${flight.availableSeats}"></td>
-            <td><input type="number" min="0" id="noOfPass" name="noOfPass"/></td>
-            <td><select name="Class" id="class">
+            <form th:action="@{'/' + ${flight.number}}" th:method="post">
+                <td><input type="number" min="0" id="noOfPass" name="noOfPass"/></td>
+            <td><select name="flightClass" id="flightClass">
                 <option value="Economic">Economic</option>
                 <option value="Second class">Second class</option>
                 <option value="First class">First class</option>
             </select></td>
-            <td><form th:action="@{'/' + ${flight.number}}" th:method="post">
-                <input type="submit" id="book" value="book Ticket"/>
+                <td><input type="submit" id="book" value="book Ticket"/></td>
             </form>
-            </td>
+
         </tr>
     </table>
 </body>
