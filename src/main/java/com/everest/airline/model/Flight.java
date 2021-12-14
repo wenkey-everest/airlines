@@ -2,8 +2,6 @@ package com.everest.airline.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Date;
 
 public class Flight {
     private long number;
@@ -17,8 +15,12 @@ public class Flight {
     private int economicSeats;
     private int firstClassSeats;
     private int secondClassSeats;
+    private double economicFare;
+    private double firstClassFare;
+    private double secondClassFare;
+    private double totalFare;
 
-    public Flight(long number, String source, String destination,  LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, int availableSeats, int economicSeats, int firstClassSeats, int secondClassSeats) {
+    public Flight(long number, String source, String destination,  LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, int availableSeats, int economicSeats, int secondClassSeats, int firstClassSeats, double economicFare) {
         this.number = number;
         this.source = source;
         this.destination = destination;
@@ -30,14 +32,11 @@ public class Flight {
         this.economicSeats=economicSeats;
         this.firstClassSeats=firstClassSeats;
         this.secondClassSeats=secondClassSeats;
-    }
+        this.economicFare = economicFare;
+        this.firstClassFare=getFirstClassSeats();
+        this.secondClassFare=getSecondClassFare();
+        this.totalFare=getTotalFare();
 
-    public long getNumber() {
-        return number;
-    }
-
-    public String getSource() {
-        return source;
     }
 
     public String getDestination() {
@@ -48,17 +47,26 @@ public class Flight {
         return departureDate;
     }
 
-    public LocalDate getArrivalDate() {
-        return arrivalDate;
+    public long getNumber() {
+        return number;
+    }
+
+    public String getSource() {
+        return source;
     }
 
     public LocalTime getDepartureTime() {
         return departureTime;
     }
 
+    public LocalDate getArrivalDate() {
+        return arrivalDate;
+    }
+
     public LocalTime getArrivalTime() {
         return arrivalTime;
     }
+
     public int getAvailableSeats() {
         return availableSeats;
     }
@@ -67,11 +75,34 @@ public class Flight {
         return economicSeats;
     }
 
+    public int getSecondClassSeats() {
+        return secondClassSeats;
+    }
+
     public int getFirstClassSeats() {
         return firstClassSeats;
     }
 
-    public int getSecondClassSeats() {
-        return secondClassSeats;
+
+    public double getEconomicFare() {
+        return economicFare;
     }
+
+    public void setTotalFare(double totalFare) {
+        this.totalFare=totalFare;
+
+    }
+
+    public double getTotalFare() {
+        return totalFare;
+    }
+
+    public double getFirstClassFare() {
+        return getEconomicFare()*2;
+    }
+
+    public double getSecondClassFare() {
+        return getEconomicFare()*1.5;
+    }
+
 }

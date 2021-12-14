@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -18,11 +18,15 @@
         <th>Arrival Time</th>
         <th>Available Seats</th>
         <th>Economic Seats</th>
-        <th>first Class Seats</th>
-        <th>secondClassSeats</th>
+        <th>Economic Fare</th>
+        <th>First Class Seats</th>
+        <th>First Class Fare</th>
+        <th>Second Class Seats</th>
+        <th>Second Class Fare</th>
         <th>Number of Passengers</th>
         <th>Select Class</th>
         <th>Book Ticket</th>
+        <th>Total Fare</th>
         <tr th:each="flight:${flights}">
             <td th:text="${flight.number}"></td>
             <td th:text="${flight.source}"></td>
@@ -33,8 +37,11 @@
             <td th:text="${flight.arrivalTime}"></td>
             <td th:text="${flight.availableSeats}"></td>
             <td th:text="${flight.economicSeats}"></td>
+            <td th:text="${flight.economicFare}"></td>
             <td th:text="${flight.firstClassSeats}"></td>
+            <td th:text="${flight.firstClassFare}"></td>
             <td th:text="${flight.secondClassSeats}"></td>
+            <td th:text="${flight.secondClassFare}"></td>
             <form th:action="@{'/' + ${flight.number}}" th:method="post">
                 <td><input type="number" min="0" id="noOfPass" name="noOfPass"/></td>
             <td><select name="flightClass" id="flightClass">
@@ -44,7 +51,7 @@
             </select></td>
                 <td><input type="submit" id="book" value="book Ticket"/></td>
             </form>
-
+            <td th:text="${flight.totalFare}"></td>
         </tr>
     </table>
 </body>
