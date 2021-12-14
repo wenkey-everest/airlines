@@ -52,7 +52,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/{number}")
-    public String book(@PathVariable("number") Long number, Model model, String flightClass, String noOfPass) {
+    public String book(@PathVariable("number") Long number, String flightClass, String noOfPass) {
         if (noOfPass.isEmpty()) {
             try {
                 throw new Exception("Please enter number of passengers");
@@ -61,7 +61,7 @@ public class SearchController {
             }
             return "noFlight";
         } else {
-            BookTicketService.bookTicket(noOfPass, number);
+            BookTicketService.bookTicket(noOfPass, number, flightClass);
             return "redirect:/search";
         }
     }

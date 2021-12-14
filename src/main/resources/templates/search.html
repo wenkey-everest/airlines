@@ -38,9 +38,9 @@
             <form th:action="@{'/' + ${flight.number}}" th:method="post">
                 <td><input type="number" min="0" id="noOfPass" name="noOfPass"/></td>
             <td><select name="flightClass" id="flightClass">
-                <option value="Economic">Economic</option>
-                <option value="Second class">Second class</option>
-                <option value="First class">First class</option>
+                <option value="economic">Economic</option>
+                <option value="firstClass">First class</option>
+                <option value="secondClass">Second class</option>
             </select></td>
                 <td><input type="submit" id="book" value="book Ticket"/></td>
             </form>
