@@ -15,16 +15,16 @@ public class FilterClass {
             if (number.equals(flight.getNumber())) {
                 switch (flightClass) {
                     case "economic":
-                        line = strings[0] + "," + strings[1] + "," + strings[2] + "," + strings[3] + "," + strings[4] + "," + strings[5] + "," + strings[6] + "," + (Integer.parseInt(strings[7]) - passengers) + "," + (Integer.parseInt(strings[8]) - passengers) + "," + strings[9] + "," + strings[10] + "," + Double.parseDouble(strings[11]);
-                        new EconomyClass(passengers,flightClass,flight, strings);
+                        FlightClass economyClass= new EconomyClass(passengers, flightClass, flight, strings);
+                        line= economyClass.setLine();
                         break;
                     case "firstClass":
-                        line = strings[0] + "," + strings[1] + "," + strings[2] + "," + strings[3] + "," + strings[4] + "," + strings[5] + "," + strings[6] + "," + (Integer.parseInt(strings[7]) - passengers) + "," + strings[8] + "," + (Integer.parseInt(strings[9]) - passengers) + "," + strings[10] + "," + Double.parseDouble(strings[11]);
-                        new FirstClass(passengers,flightClass,flight,strings);
+                       FlightClass firstClass= new FirstClass(passengers,flightClass,flight,strings);
+                       line=firstClass.setLine();
                         break;
                     case "secondClass":
-                        line = strings[0] + "," + strings[1] + "," + strings[2] + "," + strings[3] + "," + strings[4] + "," + strings[5] + "," + strings[6] + "," + (Integer.parseInt(strings[7]) - passengers) + "," + strings[8] + "," + strings[9] + "," + (Integer.parseInt(strings[10]) - passengers) + "," + Double.parseDouble(strings[11]);
-                        new SecondClass(passengers,flightClass,flight,strings);
+                        FlightClass secondClass=new SecondClass(passengers,flightClass,flight,strings);
+                        line= secondClass.setLine();
                         break;
                 }
             }

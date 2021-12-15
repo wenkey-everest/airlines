@@ -15,6 +15,7 @@ public abstract class FlightClass {
         setNumberOfPassengers();
         setFlightClass();
     }
+    public abstract String setLine();
 
     public void setNumberOfPassengers(){
         flight.setNoOfPass(passengers);
