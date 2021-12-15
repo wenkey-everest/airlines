@@ -65,10 +65,8 @@ public class SearchController {
             }
             return "noFlight";
         } else {
-            flightList = searchService.searchByFlight(this.from, this.to, this.departureDate);
             bookTicketService.bookTicket(noOfPass, number, flightClass, flightList);
-            model.addAttribute("flights",flightList);
-            return "search";
+            return "redirect:/search";
         }
     }
 

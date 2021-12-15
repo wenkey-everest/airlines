@@ -18,9 +18,9 @@ public class Flight {
     private double economicFare;
     private double firstClassFare;
     private double secondClassFare;
-    private double totalFare;
+    public double totalFare;
 
-    public Flight(long number, String source, String destination,  LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, int availableSeats, int economicSeats, int secondClassSeats, int firstClassSeats, double economicFare) {
+    public Flight(long number, String source, String destination,  LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, int availableSeats, int economicSeats, int secondClassSeats, int firstClassSeats, double economicFare, double totalFare) {
         this.number = number;
         this.source = source;
         this.destination = destination;
@@ -35,8 +35,7 @@ public class Flight {
         this.economicFare = economicFare;
         this.firstClassFare=getFirstClassSeats();
         this.secondClassFare=getSecondClassFare();
-        this.totalFare=getTotalFare();
-
+        this.totalFare=totalFare;
     }
 
     public String getDestination() {
@@ -88,14 +87,6 @@ public class Flight {
         return economicFare;
     }
 
-    public void setTotalFare(double totalFare) {
-        this.totalFare=totalFare;
-
-    }
-
-    public double getTotalFare() {
-        return totalFare;
-    }
 
     public double getFirstClassFare() {
         return getEconomicFare()*2;
