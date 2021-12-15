@@ -1,5 +1,8 @@
 package com.everest.airline.model;
 
+import com.everest.airline.flightClass.Economy;
+import com.everest.airline.flightClass.FirstClass;
+import com.everest.airline.flightClass.SecondClass;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,22 +14,13 @@ public class FilterClass {
             if (number.equals(flight.getNumber())) {
                 switch (flightClass) {
                     case "economic":
-                        line = strings[0] + "," + strings[1] + "," + strings[2] + "," + strings[3] + "," + strings[4] + "," + strings[5] + "," + strings[6] + "," + (Integer.parseInt(strings[7]) - Integer.parseInt(noOfPass)) + "," + (Integer.parseInt(strings[8]) - Integer.parseInt(noOfPass)) + "," + strings[9] + "," + strings[10] + "," + Double.parseDouble(strings[11]);
-                        flight.setNoOfPass(passengers);
-                        flight.setFlightClass(flightClass);
-                        flight.setTotalFare(flight.getEconomicFare() * passengers);
+                       new Economy(passengers,flightClass,flight, strings);
                         break;
                     case "firstClass":
-                        line = strings[0] + "," + strings[1] + "," + strings[2] + "," + strings[3] + "," + strings[4] + "," + strings[5] + "," + strings[6] + "," + (Integer.parseInt(strings[7]) - Integer.parseInt(noOfPass)) + "," + strings[8] + "," + (Integer.parseInt(strings[9]) - Integer.parseInt(noOfPass)) + "," + strings[10] + "," + Double.parseDouble(strings[11]);
-                        flight.setNoOfPass(passengers);
-                        flight.setFlightClass(flightClass);
-                        flight.setTotalFare(flight.getFirstClassFare() * passengers);
+                        new FirstClass(passengers,flightClass,flight,strings);
                         break;
                     case "secondClass":
-                        line = strings[0] + "," + strings[1] + "," + strings[2] + "," + strings[3] + "," + strings[4] + "," + strings[5] + "," + strings[6] + "," + (Integer.parseInt(strings[7]) - Integer.parseInt(noOfPass)) + "," + strings[8] + "," + strings[9] + "," + (Integer.parseInt(strings[10]) - Integer.parseInt(noOfPass)) + "," + Double.parseDouble(strings[11]);
-                        flight.setNoOfPass(passengers);
-                        flight.setFlightClass(flightClass);
-                        flight.setTotalFare(flight.getSecondClassFare() * passengers);
+                        new SecondClass(passengers,flightClass,flight,strings);
                         break;
                 }
             }
