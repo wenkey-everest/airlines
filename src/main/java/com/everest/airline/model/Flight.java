@@ -18,9 +18,11 @@ public class Flight {
     private double economicFare;
     private double firstClassFare;
     private double secondClassFare;
-    public double totalFare;
+    private int noOfPass;
+    private String flightClass;
+    private double totalFare;
 
-    public Flight(long number, String source, String destination,  LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, int availableSeats, int economicSeats, int secondClassSeats, int firstClassSeats, double economicFare, double totalFare) {
+    public Flight(long number, String source, String destination,  LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, int availableSeats, int economicSeats, int secondClassSeats, int firstClassSeats, double economicFare) {
         this.number = number;
         this.source = source;
         this.destination = destination;
@@ -35,7 +37,9 @@ public class Flight {
         this.economicFare = economicFare;
         this.firstClassFare=getFirstClassSeats();
         this.secondClassFare=getSecondClassFare();
-        this.totalFare=totalFare;
+        this.noOfPass=getNoOfPass();
+        this.flightClass=getFlightClass();
+        this.totalFare=getTotalFare();
     }
 
     public String getDestination() {
@@ -87,6 +91,25 @@ public class Flight {
         return economicFare;
     }
 
+    public void setTotalFare(double totalFare) {
+        this.totalFare = totalFare;
+    }
+
+    public int getNoOfPass() {
+        return noOfPass;
+    }
+
+    public void setNoOfPass(int noOfPass) {
+        this.noOfPass = noOfPass;
+    }
+
+    public String getFlightClass() {
+        return flightClass;
+    }
+
+    public void setFlightClass(String flightClass) {
+        this.flightClass = flightClass;
+    }
 
     public double getFirstClassFare() {
         return getEconomicFare()*2;
@@ -96,4 +119,7 @@ public class Flight {
         return getEconomicFare()*1.5;
     }
 
+    public double getTotalFare() {
+        return totalFare;
+    }
 }

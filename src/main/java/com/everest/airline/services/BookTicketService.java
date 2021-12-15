@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -15,13 +18,17 @@ public class BookTicketService {
     @Autowired
     public FilterClass filterClass;
 
-    public void bookLogic(int i, String noOfPass, Long number, String flightClass, List<Flight> flightList) {
+    private List<Flight> flightList;
+
+
+    public void bookLogic(int i, String noOfPass, Long number, String flightClass) {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(DataParser.multiFileReader()[i]));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] strings = line.split(",", -1);
                 if (number.equals(Long.parseLong(strings[0]))) {
+                    flightList.add(new Flight(Long.parseLong(strings[0]), strings[1], strings[2], LocalDate.parse(strings[3]), LocalTime.parse(strings[4]), LocalDate.parse(strings[5]), LocalTime.parse(strings[6]), Integer.parseInt(strings[7]),Integer.parseInt(strings[8]),Integer.parseInt(strings[9]),Integer.parseInt(strings[10]),Double.parseDouble(strings[11])));
                     line = filterClass.filterFlightClass(flightClass, strings, line, noOfPass, flightList,number);
                 }
                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(DataParser.multiFileReader()[i]));
@@ -34,17 +41,18 @@ public class BookTicketService {
         }
     }
 
-    public void bookTicket(String noOfPass, Long number, String flightClass, List<Flight> flightList) {
+    public List<Flight> bookTicket(String noOfPass, Long number, String flightClass) {
         if (DataParser.multiFileReader() != null) {
-            isContainFile(noOfPass, number, flightClass, flightList);
+            flightList=new ArrayList<>();
+            isContainFile(noOfPass, number, flightClass);
         }
-
+        return flightList;
     }
 
-    public void isContainFile(String noOfPass, Long number, String flightClass, List<Flight> flightList) {
+    public void isContainFile(String noOfPass, Long number, String flightClass) {
         for (int i = 1; i < DataParser.multiFileReader().length; i++) {
             if (DataParser.multiFileReader()[i].isFile()) {
-                bookLogic(i, noOfPass, number, flightClass, flightList);
+                bookLogic(i, noOfPass, number, flightClass);
             }
         }
     }

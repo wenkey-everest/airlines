@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<h1>Airline application</h1>
+<table border="1">
+    <th>Number</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Departure Date</th>
+    <th>Departure Time</th>
+    <th>Arrival Date</th>
+    <th>Arrival Time</th>
+    <th>No of passengers</th>
+    <th>Class</th>
+    <th>Total Fare</th>
+    <tr th:each="flight:${flights}">
+        <td th:text="${flight.number}"></td>
+        <td th:text="${flight.source}"></td>
+        <td th:text="${flight.destination}"></td>
+        <td th:text="${flight.departureDate}"></td>
+        <td th:text="${flight.departureTime}"></td>
+        <td th:text="${flight.arrivalDate}"></td>
+        <td th:text="${flight.arrivalTime}"></td>
+        <td th:text="${flight.noOfPass}"></td>
+        <td th:text="${flight.flightClass}"></td>
+        <td th:text="${flight.totalFare}"></td>
+    </tr>
+</table>
+<a th:href="@{/}">Return</a>
+</body>
+</html>
