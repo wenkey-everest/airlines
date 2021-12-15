@@ -1,4 +1,4 @@
-package com.everest.airline.flightClass;
+package com.everest.airline.flightClassViews;
 
 import com.everest.airline.model.Flight;
 
