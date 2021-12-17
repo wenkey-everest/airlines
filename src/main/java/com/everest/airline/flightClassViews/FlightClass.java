@@ -15,16 +15,16 @@ public abstract class FlightClass {
         setNumberOfPassengers();
         setFlightClass();
     }
+
     public abstract String setLine();
 
-    public void setNumberOfPassengers(){
+    public void setNumberOfPassengers() {
         flight.setNoOfPass(passengers);
     }
 
-    public void setFlightClass(){
+    public void setFlightClass() {
         flight.setFlightClass(flightClass);
     }
-
 
 
 }
