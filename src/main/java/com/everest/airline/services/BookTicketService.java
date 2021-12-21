@@ -31,7 +31,7 @@ public class BookTicketService {
                     Flight flight = new Flight(Long.parseLong(strings[0]), strings[1], strings[2], LocalDate.parse(strings[3]), LocalTime.parse(strings[4]), LocalDate.parse(strings[5]), LocalTime.parse(strings[6]), Integer.parseInt(strings[7]),Integer.parseInt(strings[8]),Integer.parseInt(strings[9]),Integer.parseInt(strings[10]),Integer.parseInt(strings[11]),Integer.parseInt(strings[12]),
                             Integer.parseInt(strings[13]),Double.parseDouble(strings[14]));
                     flightList.add(flight);
-                     filterClass.filterFlightClass(flightClass, noOfPass, flightList, number,flight.getEconomicSeats(),flight.getFirstClassSeats(), flight.getSecondClassSeats());
+                     filterClass.filterFlightClass(flightClass, noOfPass, flightList, number);
                      line=filterClass.getLine();
                 }
                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(DataParser.multiFileReader()[i]));

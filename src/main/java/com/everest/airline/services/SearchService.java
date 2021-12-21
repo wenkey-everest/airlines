@@ -46,7 +46,7 @@ public class SearchService {
                                 Integer.parseInt(strings[13]),
                                 Double.parseDouble(strings[14]));
                        flightList.add(flight);
-                       filterClass.filterFlightClass(flightClass,noOfPass,flightList,flight.getNumber(), flight.getEconomicSeats(), flight.getFirstClassSeats(), flight.getSecondClassSeats());
+                       filterClass.filterFlightClass(flightClass,noOfPass,flightList,flight.getNumber());
                        totalCost= filterClass.getTotalCost();
                     }
                 }

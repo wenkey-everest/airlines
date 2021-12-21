@@ -13,7 +13,7 @@ public class FilterClass {
     private String line;
     private double totalCost;
     private boolean check;
-    public void filterFlightClass(String flightClass, String noOfPass, List<Flight> flightList, Long number, int economicSeats, int firstClassSeats, int secondClassSeats) {
+    public void filterFlightClass(String flightClass, String noOfPass, List<Flight> flightList, Long number) {
         int passengers = Integer.parseInt(noOfPass);
         for(Flight flight:flightList) {
             if (number.equals(flight.getNumber())) {
