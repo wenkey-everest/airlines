@@ -13,15 +13,23 @@ public class SecondClass extends FlightClass{
     }
     @Override
     public String setLine() {
-        line = flight.getNumber() + "," + flight.getSource() + "," + flight.getDestination() + "," + flight.getDepartureDate() + "," + flight.getDepartureTime() + "," + flight.getArrivalDate() + "," + flight.getArrivalTime() + "," + (flight.getAvailableSeats() - passengers) + "," + flight.getEconomicSeats()+ "," + (flight.getSecondClassSeats()-passengers) + "," + flight.getFirstClassSeats() + "," + flight.getEconomicSeatsCapacity()+","+flight.getFirstClassSeatsCapacity()+","+flight.getSecondClassSeatsCapacity()+","+flight.getEconomicFare();
+        line = flight.getNumber() + "," + flight.getSource() + "," + flight.getDestination() + "," + flight.getDepartureDate() + "," + flight.getDepartureTime() + "," + flight.getArrivalDate() + "," + flight.getArrivalTime() + "," + (flight.getAvailableSeats() - passengers) + "," + flight.getEconomicSeats()+ "," + (flight.getSecondClassSeats()-passengers) + "," + flight.getFirstClassSeats() + "," + flight.getEconomicSeatsCapacity()+","+flight.getFirstClassSeatsCapacity()+","+flight.getSecondClassSeatsCapacity()+","+flight.getBaseFare();
         return line;
     }
 
     @Override
     public double totalCost(int passengers) {
-        totalCost = flight.getSecondClassFare()*passengers;
+        totalCost = secondClassFareBySeats()*passengers;
         return totalCost;
     }
+
+    public double secondClassFareBySeats(){
+        double classFare=priceBySeats(flight.getSecondClassSeats(),flight.getSecondClassSeatsCapacity(),(flight.getBaseFare()*1.5));
+        flight.setSecondClassFare(classFare);
+        return classFare;
+    }
+
+
     @Override
     public boolean validateSeats(int passengerCount) {
         return passengerCount < flight.getSecondClassSeats();

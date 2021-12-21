@@ -21,11 +21,12 @@ public class Flight {
     private int noOfPass;
     private String flightClass;
     private double totalFare;
+    private double baseFare;
     private int economicSeatsCapacity;
     private int firstClassSeatsCapacity;
     private int secondClassSeatsCapacity;
 
-    public Flight(long number, String source, String destination,  LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, int availableSeats, int economicSeats, int secondClassSeats, int firstClassSeats, int economicSeatsCapacity, int firstClassSeatsCapacity, int secondClassSeatsCapacity,double economicFare) {
+    public Flight(long number, String source, String destination,  LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, int availableSeats, int economicSeats, int secondClassSeats, int firstClassSeats, int economicSeatsCapacity, int secondClassSeatsCapacity , int firstClassSeatsCapacity,double baseFare) {
         this.number = number;
         this.source = source;
         this.destination = destination;
@@ -37,7 +38,7 @@ public class Flight {
         this.economicSeats=economicSeats;
         this.firstClassSeats=firstClassSeats;
         this.secondClassSeats=secondClassSeats;
-        this.economicFare = economicFare;
+        this.baseFare = baseFare;
         this.economicSeatsCapacity=economicSeatsCapacity;
         this.firstClassSeatsCapacity=firstClassSeatsCapacity;
         this.secondClassSeatsCapacity=secondClassSeatsCapacity;
@@ -118,11 +119,24 @@ public class Flight {
     }
 
     public double getFirstClassFare() {
-        return getEconomicFare()*2;
+        return firstClassFare;
     }
 
     public double getSecondClassFare() {
-        return getEconomicFare()*1.5;
+        return secondClassFare;
+    }
+
+
+    public void setEconomicFare(double economicFare) {
+        this.economicFare = economicFare;
+    }
+
+    public void setFirstClassFare(double firstClassFare) {
+        this.firstClassFare = firstClassFare;
+    }
+
+    public void setSecondClassFare(double secondClassFare) {
+        this.secondClassFare = secondClassFare;
     }
 
     public double getTotalFare() {
@@ -140,4 +154,9 @@ public class Flight {
     public int getSecondClassSeatsCapacity() {
         return secondClassSeatsCapacity;
     }
+
+    public double getBaseFare() {
+        return baseFare;
+    }
+
 }
