@@ -1,12 +1,16 @@
 package com.everest.airline.flightClassViews;
 
 import com.everest.airline.model.Flight;
+import com.everest.airline.model.Pricing;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class EconomyClass extends FlightClass {
     private int passengers;
     private String line;
     private Flight flight;
     private double totalCost;
+
+
 
     public EconomyClass(int passengers, String flightClass, Flight flight) {
         this.passengers = passengers;
@@ -26,7 +30,8 @@ public class EconomyClass extends FlightClass {
     }
 
     public double economicFareBySeats(){
-        double classFare=priceByDate(flight.getDepartureDate(),flight.getEconomicSeats(),flight.getEconomicSeatsCapacity(),flight.getBaseFare());
+        Pricing pricing = new Pricing();
+        double classFare= pricing.priceByDate(flight.getDepartureDate(),flight.getEconomicSeats(),flight.getEconomicSeatsCapacity(),flight.getBaseFare());
         flight.setEconomicFare(classFare);
         return classFare;
     }
