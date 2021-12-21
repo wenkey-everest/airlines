@@ -10,11 +10,11 @@ public class Pricing {
         Duration duration = Duration.between(LocalDate.now().atStartOfDay(),departureDate.atStartOfDay());
         double classFare = priceBySeats(availableSeats,classCapacity,basePrice);
         Long beforeDate=duration.toDays();
-        System.out.println(beforeDate);
         if(beforeDate>10)
             return classFare;
-        else if(beforeDate>3)
-            return classFare + (classFare * getIncrementer(departureDate,10,3,0.02));
+        else if(beforeDate>3) {
+            return classFare + (classFare * getIncrementer(departureDate, 10, 3, 0.02));
+        }
         else
             return classFare + (classFare * getIncrementer(departureDate,3,0,0.1));
     }
@@ -34,8 +34,8 @@ public class Pricing {
         LocalDate date1 = departureDate.minusDays(minDateToHike);
         LocalDate date2 = departureDate.minusDays(maxDateToHike);
         double incrementer=0;
-        incrementer = incrementer+incrementerValue;
         for(LocalDate date=date1;date.isBefore(date2);date=date.plusDays(1)){
+            incrementer = incrementer+incrementerValue;
             if(date.isEqual(LocalDate.now())){
                 break;
             }
