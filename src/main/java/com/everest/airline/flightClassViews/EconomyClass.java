@@ -26,7 +26,7 @@ public class EconomyClass extends FlightClass {
     }
 
     public double economicFareBySeats(){
-        double classFare=priceBySeats(flight.getEconomicSeats(),flight.getEconomicSeatsCapacity(),flight.getBaseFare());
+        double classFare=priceByDate(flight.getDepartureDate(),flight.getEconomicSeats(),flight.getEconomicSeatsCapacity(),flight.getBaseFare());
         flight.setEconomicFare(classFare);
         return classFare;
     }

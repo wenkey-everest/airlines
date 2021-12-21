@@ -24,7 +24,7 @@ public class SecondClass extends FlightClass{
     }
 
     public double secondClassFareBySeats(){
-        double classFare=priceBySeats(flight.getSecondClassSeats(),flight.getSecondClassSeatsCapacity(),(flight.getBaseFare()*1.5));
+        double classFare=priceByDate(flight.getDepartureDate(),flight.getSecondClassSeats(),flight.getSecondClassSeatsCapacity(),(flight.getBaseFare()*1.5));
         flight.setSecondClassFare(classFare);
         return classFare;
     }

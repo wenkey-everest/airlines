@@ -24,7 +24,7 @@ public class FirstClass extends FlightClass {
     }
 
     public double firstClassFareBySeats(){
-        double classFare=priceBySeats(flight.getFirstClassSeats(),flight.getFirstClassSeatsCapacity(),(flight.getBaseFare()*2));
+        double classFare=priceByDate(flight.getDepartureDate(),flight.getFirstClassSeats(),flight.getFirstClassSeatsCapacity(),(flight.getBaseFare()*2));
         flight.setFirstClassFare(classFare);
         return classFare;
     }
