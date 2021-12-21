@@ -31,13 +31,13 @@
             <td th:text="${flight.arrivalDate}"></td>
             <td th:text="${flight.arrivalTime}"></td>
             <td th:if="${flightClass} == 'economic'" th:text="${flight.economicSeats}"></td>
-            <td th:if="${flightClass} == 'first'" th:text="${flight.firstClassSeats}" ></td>
-            <td th:if="${flightClass} == 'second'" th:text="${flight.secondClassSeats}"></td>
+            <td th:if="${flightClass} == 'firstClass'" th:text="${flight.firstClassSeats}" ></td>
+            <td th:if="${flightClass} == 'secondClass'" th:text="${flight.secondClassSeats}"></td>
             <td th:text="${flightClass}"></td>
             <td th:text="${noOfPass}"></td>
             <td th:if="${flightClass} == 'economic'" th:text="${flight.getEconomicFare()}"></td>
-            <td th:if="${flightClass} == 'first'" th:text="${flight.getFirstClassFare()}" ></td>
-            <td th:if="${flightClass} == 'second'" th:text="${flight.getSecondClassFare()}"></td>
+            <td th:if="${flightClass} == 'firstClass'" th:text="${flight.getFirstClassFare()}" ></td>
+            <td th:if="${flightClass} == 'secondClass'" th:text="${flight.getSecondClassFare()}"></td>
             <td th:text="${totalFare}"></td>
 
             <form th:action="@{'/' + ${flight.number}+'/'+${flightClass}+'/'+${noOfPass}}" th:method="post">

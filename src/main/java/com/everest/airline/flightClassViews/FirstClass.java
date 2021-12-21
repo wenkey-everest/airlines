@@ -2,32 +2,28 @@ package com.everest.airline.flightClassViews;
 
 import com.everest.airline.model.Flight;
 
-public class FirstClass extends FlightClass {
-    private String[] strings;
+public class FirstClass implements FlightClass {
     private int passengers;
     private String line;
     private Flight flight;
-    public FirstClass(int passengers, String flightClass, Flight flight, String[] strings) {
-        super(passengers, flightClass, flight);
+    private double totalCost;
+    public FirstClass(int passengers, String flightClass, Flight flight) {
         this.passengers = passengers;
-        this.strings = strings;
         this.flight=flight;
-        setFare(flight, passengers);
     }
     @Override
     public String setLine() {
-        line = strings[0] + "," + strings[1] + "," + strings[2] + "," + strings[3] + "," + strings[4] + "," + strings[5] + "," + strings[6] + "," + Integer.parseInt(strings[7]) + "," + Integer.parseInt(strings[8]) + "," + strings[9] + "," + strings[10] + "," + Double.parseDouble(strings[11]);
-        if(flight.getEconomicSeats()>passengers)
-        line = strings[0] + "," + strings[1] + "," + strings[2] + "," + strings[3] + "," + strings[4] + "," + strings[5] + "," + strings[6] + "," + (Integer.parseInt(strings[7]) - passengers) + "," + strings[8] + "," + (Integer.parseInt(strings[9]) - passengers) + "," + strings[10] + "," + Double.parseDouble(strings[11]);
-        else try {
-            throw new Exception("enter valid number to book");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        line = flight.getNumber() + "," + flight.getSource() + "," + flight.getDestination() + "," + flight.getDepartureDate() + "," + flight.getDepartureTime() + "," + flight.getArrivalDate() + "," + flight.getArrivalTime() + "," + (flight.getAvailableSeats() - passengers) + "," + flight.getEconomicSeats() + "," + flight.getSecondClassSeats() + "," + (flight.getFirstClassSeats()-passengers) + "," + flight.getEconomicSeatsCapacity()+","+flight.getFirstClassSeatsCapacity()+","+flight.getSecondClassSeatsCapacity()+","+flight.getEconomicFare();
         return line;
     }
 
-    public void setFare(Flight flight, int passengers) {
-        flight.setTotalFare(flight.getSecondClassFare() * passengers);
+    @Override
+    public double totalCost(int passengers) {
+        totalCost = flight.getFirstClassFare()*passengers;
+        return totalCost;
+    }
+    @Override
+    public boolean validateSeats(int passengerCount) {
+        return passengerCount < flight.getFirstClassSeats();
     }
 }

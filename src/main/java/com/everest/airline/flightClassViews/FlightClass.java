@@ -1,30 +1,14 @@
 package com.everest.airline.flightClassViews;
 
-import com.everest.airline.model.Flight;
 
-public abstract class FlightClass {
+public interface FlightClass {
 
-    private int passengers;
-    private String flightClass;
-    private Flight flight;
+    String setLine();
 
-    public FlightClass(int passengers, String flightClass, Flight flight) {
-        this.passengers = passengers;
-        this.flightClass = flightClass;
-        this.flight = flight;
-        setNumberOfPassengers();
-        setFlightClass();
-    }
+    double totalCost(int passengers);
 
-    public abstract String setLine();
+    boolean validateSeats(int passengers);
 
-    public void setNumberOfPassengers() {
-        flight.setNoOfPass(passengers);
-    }
-
-    public void setFlightClass() {
-        flight.setFlightClass(flightClass);
-    }
 
 
 }

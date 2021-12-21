@@ -2,7 +2,6 @@ package com.everest.airline.controllers;
 
 import com.everest.airline.FileDivider;
 import com.everest.airline.model.Flight;
-import com.everest.airline.model.TotalCostCalculation;
 import com.everest.airline.services.BookTicketService;
 import com.everest.airline.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,6 @@ public class SearchController {
 
     @Autowired
     public BookTicketService bookTicketService;
-    @Autowired
-    public TotalCostCalculation totalCostCalculation;
 
     @RequestMapping(value = "/")
     public String home() {
@@ -41,12 +38,10 @@ public class SearchController {
         } catch (Exception e) {
             return "noFlight";
         }
-
-
-        model.addAttribute("flights", flightList);
+            model.addAttribute("flights", flightList);
             model.addAttribute("flightClass",flightClass);
             model.addAttribute("noOfPass",noOfPass);
-            model.addAttribute("totalFare",totalCostCalculation.totalCost(flightClass,Integer.parseInt(noOfPass)));
+            model.addAttribute("totalFare",searchService.getTotalCost());
             return "search";
     }
 
