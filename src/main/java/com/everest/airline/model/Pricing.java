@@ -1,7 +1,5 @@
 package com.everest.airline.model;
 
-import org.springframework.stereotype.Component;
-
 import java.time.Duration;
 import java.time.LocalDate;
 

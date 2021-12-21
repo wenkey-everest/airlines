@@ -20,7 +20,6 @@ public class SearchService {
     @Autowired
     public FilterClass filterClass;
 
-
     public List<Flight> searchByFlight(String from, String to, String departureDate, String flightClass, String noOfPass) throws Exception {
         flightList = new ArrayList<>();
         if (DataParser.multiFileReader() != null)
