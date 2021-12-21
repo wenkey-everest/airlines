@@ -2,9 +2,8 @@ package com.everest.airline.flightClassViews;
 
 import com.everest.airline.model.Flight;
 import com.everest.airline.model.Pricing;
-import org.springframework.beans.factory.annotation.Autowired;
 
-public class EconomyClass extends FlightClass {
+public class EconomyClass implements FlightClass {
     private int passengers;
     private String line;
     private Flight flight;
@@ -12,7 +11,7 @@ public class EconomyClass extends FlightClass {
 
 
 
-    public EconomyClass(int passengers, String flightClass, Flight flight) {
+    public EconomyClass(int passengers, Flight flight) {
         this.passengers = passengers;
         this.flight=flight;
     }

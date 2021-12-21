@@ -19,19 +19,19 @@ public class FilterClass {
             if (number.equals(flight.getNumber())) {
                 switch (flightClass) {
                     case "economic":
-                        FlightClass economyClass = new EconomyClass(passengers, flightClass, flight);
+                        FlightClass economyClass = new EconomyClass(passengers, flight);
                         check = economyClass.validateSeats(passengers);
                         totalCost=economyClass.totalCost(passengers);
                         line= economyClass.setLine();
                         break;
                     case "firstClass":
-                       FlightClass firstClass = new FirstClass(passengers,flightClass,flight);
+                       FlightClass firstClass = new FirstClass(passengers,flight);
                         check = firstClass.validateSeats(passengers);
                         totalCost=firstClass.totalCost(passengers);
                         line=firstClass.setLine();
                         break;
                     case "secondClass":
-                        FlightClass secondClass = new SecondClass(passengers,flightClass,flight);
+                        FlightClass secondClass = new SecondClass(passengers,flight);
                         check = secondClass.validateSeats(passengers);
                         totalCost=secondClass.totalCost(passengers);
                         line=secondClass.setLine();

@@ -2,16 +2,15 @@ package com.everest.airline.flightClassViews;
 
 import com.everest.airline.model.Flight;
 import com.everest.airline.model.Pricing;
-import org.springframework.beans.factory.annotation.Autowired;
 
-public class FirstClass extends FlightClass {
+public class FirstClass implements FlightClass {
     private int passengers;
     private String line;
     private Flight flight;
     private double totalCost;
 
 
-    public FirstClass(int passengers, String flightClass, Flight flight) {
+    public FirstClass(int passengers, Flight flight) {
         this.passengers = passengers;
         this.flight=flight;
     }
