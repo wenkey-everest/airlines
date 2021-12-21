@@ -2,7 +2,7 @@ package com.everest.airline.flightClassViews;
 
 import com.everest.airline.model.Flight;
 
-public class FirstClass implements FlightClass {
+public class FirstClass extends FlightClass {
     private int passengers;
     private String line;
     private Flight flight;

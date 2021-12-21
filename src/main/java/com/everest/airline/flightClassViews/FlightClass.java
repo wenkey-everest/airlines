@@ -1,13 +1,13 @@
 package com.everest.airline.flightClassViews;
 
 
-public interface FlightClass {
+public abstract class FlightClass {
 
-    String setLine();
+  public abstract String setLine();
 
-    double totalCost(int passengers);
+  public abstract double totalCost(int passengers);
 
-    boolean validateSeats(int passengers);
+  public abstract boolean validateSeats(int passengers);
 
 
 

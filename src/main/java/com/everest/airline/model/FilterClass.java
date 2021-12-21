@@ -20,19 +20,19 @@ public class FilterClass {
                 switch (flightClass) {
                     case "economic":
                         FlightClass economyClass = new EconomyClass(passengers, flightClass, flight);
-                        check = validateSeats(passengers,economicSeats);
+                        check = economyClass.validateSeats(passengers);
                         totalCost=economyClass.totalCost(passengers);
                         line= economyClass.setLine();
                         break;
                     case "firstClass":
                        FlightClass firstClass = new FirstClass(passengers,flightClass,flight);
-                        check = validateSeats(passengers,firstClassSeats);
+                        check = firstClass.validateSeats(passengers);
                         totalCost=firstClass.totalCost(passengers);
                         line=firstClass.setLine();
                         break;
                     case "secondClass":
                         FlightClass secondClass = new SecondClass(passengers,flightClass,flight);
-                        check = validateSeats(passengers,secondClassSeats);
+                        check = secondClass.validateSeats(passengers);
                         totalCost=secondClass.totalCost(passengers);
                         line=secondClass.setLine();
                         break;
@@ -41,11 +41,7 @@ public class FilterClass {
         }
     }
 
-
-    public boolean validateSeats(int passengerCount,int availableSeats) {
-        return passengerCount < availableSeats;
-    }
-
+    
     public boolean isCheck() {
         return check;
     }
