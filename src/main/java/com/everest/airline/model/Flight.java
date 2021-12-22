@@ -18,8 +18,6 @@ public class Flight {
     private double economicFare;
     private double firstClassFare;
     private double secondClassFare;
-    private int noOfPass;
-    private String flightClass;
     private double totalFare;
     private double baseFare;
     private int economicSeatsCapacity;
@@ -44,8 +42,6 @@ public class Flight {
         this.secondClassSeatsCapacity=secondClassSeatsCapacity;
         this.firstClassFare=getFirstClassSeats();
         this.secondClassFare=getSecondClassFare();
-        this.noOfPass=getNoOfPass();
-        this.flightClass=getFlightClass();
         this.totalFare=getTotalFare();
     }
 
@@ -100,22 +96,6 @@ public class Flight {
 
     public void setTotalFare(double totalFare) {
         this.totalFare = totalFare;
-    }
-
-    public int getNoOfPass() {
-        return noOfPass;
-    }
-
-    public void setNoOfPass(int noOfPass) {
-        this.noOfPass = noOfPass;
-    }
-
-    public String getFlightClass() {
-        return flightClass;
-    }
-
-    public void setFlightClass(String flightClass) {
-        this.flightClass = flightClass;
     }
 
     public double getFirstClassFare() {
