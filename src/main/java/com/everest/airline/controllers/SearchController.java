@@ -41,7 +41,6 @@ public class SearchController {
             model.addAttribute("flights", flightList);
             model.addAttribute("flightClass",flightClass);
             model.addAttribute("noOfPass",noOfPass);
-            model.addAttribute("totalFare",searchService.getTotalCost());
             return "search";
     }
 

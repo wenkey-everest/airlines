@@ -22,21 +22,22 @@ public class SecondClass implements FlightClass{
 
     @Override
     public double totalCost(int passengers) {
-        totalCost = secondClassFareBySeats()*passengers;
+        totalCost = classFareBySeats()*passengers;
+        flight.setTotalFare(totalCost);
         return totalCost;
     }
 
-    public double secondClassFareBySeats(){
+    @Override
+    public double classFareBySeats(){
         Pricing pricing = new Pricing();
         double classFare= pricing.priceByDate(flight.getDepartureDate(),flight.getSecondClassSeats(),flight.getSecondClassSeatsCapacity(),(flight.getBaseFare()*1.5));
         flight.setSecondClassFare(classFare);
         return classFare;
     }
 
-
     @Override
-    public boolean validateSeats(int passengerCount) {
-        return passengerCount < flight.getSecondClassSeats();
+    public boolean validateSeats(int noOfPass) {
+        return noOfPass < flight.getSecondClassSeats();
     }
 
 }

@@ -10,9 +10,8 @@ public class Pricing {
         Long beforeDate=duration.toDays();
         if(beforeDate>10)
             return classFare;
-        else if(beforeDate>3) {
+        else if(beforeDate>3)
             return classFare + (classFare * getIncrementer(departureDate, 10, 3, 0.02));
-        }
         else
             return classFare + (classFare * getIncrementer(departureDate,3,0,0.1));
     }
@@ -20,9 +19,9 @@ public class Pricing {
     public double priceBySeats(int availableSeats, int classCapacity, double basePrice){
         if(availableSeats>classCapacity*0.7)
             return basePrice;
-        else if(availableSeats<classCapacity*0.7 && availableSeats>classCapacity*0.5)
+        else if(availableSeats<=classCapacity*0.7 && availableSeats>classCapacity*0.5)
             return basePrice + (basePrice*0.2);
-        else if(availableSeats<classCapacity*0.5 && availableSeats>classCapacity*0.25)
+        else if(availableSeats<=classCapacity*0.5 && availableSeats>classCapacity*0.25)
             return basePrice + (basePrice*0.35);
         else
             return basePrice + (basePrice*0.5);

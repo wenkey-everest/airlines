@@ -21,22 +21,22 @@ public class EconomyClass implements FlightClass {
             line = flight.getNumber() + "," + flight.getSource() + "," + flight.getDestination() + "," + flight.getDepartureDate() + "," + flight.getDepartureTime() + "," + flight.getArrivalDate() + "," + flight.getArrivalTime() + "," + (flight.getAvailableSeats() - passengers) + "," + (flight.getEconomicSeats() - passengers) + "," + flight.getSecondClassSeats() + "," + flight.getFirstClassSeats() + "," + flight.getEconomicSeatsCapacity()+","+flight.getFirstClassSeatsCapacity()+","+flight.getSecondClassSeatsCapacity()+","+flight.getBaseFare();
         return line;
     }
-
     @Override
     public double totalCost(int passengers) {
-        totalCost = economicFareBySeats()*passengers;
+        totalCost = classFareBySeats()*passengers;
+        flight.setTotalFare(totalCost);
         return totalCost;
     }
-
-    public double economicFareBySeats(){
+    @Override
+    public double classFareBySeats(){
         Pricing pricing = new Pricing();
         double classFare= pricing.priceByDate(flight.getDepartureDate(),flight.getEconomicSeats(),flight.getEconomicSeatsCapacity(),flight.getBaseFare());
         flight.setEconomicFare(classFare);
         return classFare;
     }
     @Override
-    public boolean validateSeats(int passengerCount) {
-        return passengerCount < flight.getEconomicSeats();
+    public boolean validateSeats(int noOfPass) {
+        return noOfPass < flight.getEconomicSeats();
     }
 
 

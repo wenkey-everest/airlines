@@ -9,7 +9,6 @@ public class FirstClass implements FlightClass {
     private Flight flight;
     private double totalCost;
 
-
     public FirstClass(int passengers, Flight flight) {
         this.passengers = passengers;
         this.flight=flight;
@@ -22,11 +21,12 @@ public class FirstClass implements FlightClass {
 
     @Override
     public double totalCost(int passengers) {
-        totalCost = firstClassFareBySeats()*passengers;
+        totalCost = classFareBySeats()*passengers;
+        flight.setTotalFare(totalCost);
         return totalCost;
     }
-
-    public double firstClassFareBySeats(){
+    @Override
+    public double classFareBySeats(){
         Pricing pricing = new Pricing();
         double classFare=pricing.priceByDate(flight.getDepartureDate(),flight.getFirstClassSeats(),flight.getFirstClassSeatsCapacity(),(flight.getBaseFare()*2));
         flight.setFirstClassFare(classFare);
@@ -34,7 +34,7 @@ public class FirstClass implements FlightClass {
     }
 
     @Override
-    public boolean validateSeats(int passengerCount) {
-        return passengerCount < flight.getFirstClassSeats();
+    public boolean validateSeats(int noOfPass) {
+        return noOfPass < flight.getFirstClassSeats();
     }
 }

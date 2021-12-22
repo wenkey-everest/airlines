@@ -7,6 +7,8 @@ public interface FlightClass {
 
   double totalCost(int passengers);
 
+  double classFareBySeats();
+
    boolean validateSeats(int passengers);
 
 }
