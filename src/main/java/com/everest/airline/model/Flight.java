@@ -40,9 +40,6 @@ public class Flight {
         this.economicSeatsCapacity=economicSeatsCapacity;
         this.firstClassSeatsCapacity=firstClassSeatsCapacity;
         this.secondClassSeatsCapacity=secondClassSeatsCapacity;
-        this.firstClassFare=getFirstClassSeats();
-        this.secondClassFare=getSecondClassFare();
-        this.totalFare=getTotalFare();
     }
 
     public String getDestination() {

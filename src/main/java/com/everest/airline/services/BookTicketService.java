@@ -21,9 +21,9 @@ public class BookTicketService {
     private List<Flight> flightList;
 
 
-    public void bookLogic(int i, String noOfPass, Long number, String flightClass) {
+    public void bookLogic(File file, String noOfPass, Long number, String flightClass) {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(DataParser.multiFileReader()[i]));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] strings = line.split(",", -1);
@@ -34,7 +34,7 @@ public class BookTicketService {
                      filterClass.filterFlightClass(flightClass, noOfPass, flightList, number);
                      line=filterClass.getLine();
                 }
-                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(DataParser.multiFileReader()[i]));
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
                 bufferedWriter.write(line);
                 bufferedWriter.close();
             }
@@ -53,9 +53,9 @@ public class BookTicketService {
     }
 
     public void isContainFile(String noOfPass, Long number, String flightClass) {
-        for (int i = 1; i < DataParser.multiFileReader().length; i++) {
-            if (DataParser.multiFileReader()[i].isFile()) {
-                bookLogic(i, noOfPass, number, flightClass);
+       for(File file:DataParser.multiFileReader()){
+            if (file.getName().endsWith(".txt")) {
+                bookLogic(file, noOfPass, number, flightClass);
             }
         }
     }

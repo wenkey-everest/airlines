@@ -30,7 +30,7 @@ public class Pricing {
     public double getIncrementer(LocalDate departureDate, int minDateToHike, int maxDateToHike, double incrementerValue){
         LocalDate date1 = departureDate.minusDays(minDateToHike);
         LocalDate date2 = departureDate.minusDays(maxDateToHike);
-        double incrementer=0;
+        double incrementer = 0;
         for(LocalDate date=date1;date.isBefore(date2);date=date.plusDays(1)){
             incrementer = incrementer+incrementerValue;
             if(date.isEqual(LocalDate.now())){

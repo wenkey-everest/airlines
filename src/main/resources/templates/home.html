@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Airline application</h1>
-    <form action="#" th:action="@{/search}" th:object="${searchForm}" method="post">
+    <form action="#" th:action="@{/search}" th:object="${searchForm}" th:method="post" method="post">
         <label for="from">From </label>
         <input id="from" name="from" required="required" />
         <br />

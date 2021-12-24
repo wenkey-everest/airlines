@@ -32,7 +32,7 @@ public class SearchController {
     @RequestMapping(value = "/search")
     public String search(String from, String to, Model model, String departureDate,String flightClass, String noOfPass) {
 
-        List<Flight> flightList = null;
+        List<Flight> flightList;
         try {
             flightList = searchService.searchByFlight(from, to, departureDate,flightClass,noOfPass);
         } catch (Exception e) {
