@@ -25,34 +25,28 @@ public class SearchController {
 
     @RequestMapping(value = "/")
     public String home() {
-//       fileDivider.testFileDivider();
+       fileDivider.testFileDivider();
         return "home";
     }
 
     @RequestMapping(value = "/search")
     public String search(String from, String to, Model model, String departureDate,String flightClass, String noOfPass) {
-
-        List<Flight> flightList;
         try {
-            flightList = searchService.searchByFlight(from, to, departureDate,flightClass,noOfPass);
-        } catch (Exception e) {
-            return "noFlight";
-        }
+            List<Flight> flightList = searchService.searchByFlight(from, to, departureDate,flightClass,noOfPass);
             model.addAttribute("flights", flightList);
             model.addAttribute("flightClass",flightClass);
             model.addAttribute("noOfPass",noOfPass);
             return "search";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "noFlight";
+        }
     }
 
     @RequestMapping(value = "/{number}/{flightClass}/{noOfPass}")
     public String book(@PathVariable("number") Long number, @PathVariable("flightClass") String flightClass,@PathVariable("noOfPass") String noOfPass, Model model) {
         if (noOfPass.isEmpty()) {
-            try {
-                throw new Exception("Please enter number of passengers");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return "noFlight";
+                throw new RuntimeException("Please enter number of passengers");
         } else {
                 List<Flight> flightList = bookTicketService.bookTicket(noOfPass, number, flightClass);
                 model.addAttribute("flights", flightList);

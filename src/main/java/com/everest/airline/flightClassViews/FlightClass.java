@@ -5,10 +5,12 @@ public interface FlightClass {
 
   String setLine();
 
-  double totalCost(int passengers);
+  void totalCost(int passengers);
 
   double classFareBySeats();
 
-   boolean validateSeats(int passengers);
+  boolean validateSeats(int passengers);
+
+
 
 }

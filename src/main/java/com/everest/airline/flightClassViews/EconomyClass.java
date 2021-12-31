@@ -8,38 +8,60 @@ public class EconomyClass implements FlightClass {
     private String line;
     private Flight flight;
     private double totalCost;
+    private int economicSeatsAvailable;
+    private double economicClassFare;
+    private int economicClassCapacity;
 
+    public EconomyClass(int economicSeatsAvailable, int economicClassCapacity) {
+        this.economicSeatsAvailable = economicSeatsAvailable;
+        this.economicClassCapacity = economicClassCapacity;
+    }
 
-
-    public EconomyClass(int passengers, Flight flight) {
+    public EconomyClass(int passengers, Flight  flight) {
         this.passengers = passengers;
         this.flight=flight;
     }
 
     @Override
     public String setLine() {
-            line = flight.getNumber() + "," + flight.getSource() + "," + flight.getDestination() + "," + flight.getDepartureDate() + "," + flight.getDepartureTime() + "," + flight.getArrivalDate() + "," + flight.getArrivalTime() + "," + (flight.getAvailableSeats() - passengers) + "," + (flight.getEconomicSeats() - passengers) + "," + flight.getSecondClassSeats() + "," + flight.getFirstClassSeats() + "," + flight.getEconomicSeatsCapacity()+","+flight.getFirstClassSeatsCapacity()+","+flight.getSecondClassSeatsCapacity()+","+flight.getBaseFare();
+        int economicSeats = flight.getEconomyClass().getEconomicSeatsAvailable()- passengers;
+        int secondClassSeats = flight.getSecondClass().getSecondClassSeatsAvailable();
+        int firstClassSeats = flight.getFirstClass().getFirstClassSeatsAvailable();
+        line = flight.flightString(passengers,economicSeats,secondClassSeats,firstClassSeats);
         return line;
     }
     @Override
-    public double totalCost(int passengers) {
+    public void totalCost(int passengers) {
         totalCost = classFareBySeats()*passengers;
         flight.setTotalFare(totalCost);
-        return totalCost;
     }
     @Override
     public double classFareBySeats(){
         Pricing pricing = new Pricing();
-        double classFare= pricing.priceByDate(flight.getDepartureDate(),flight.getEconomicSeats(),flight.getEconomicSeatsCapacity(),flight.getBaseFare());
-        flight.setEconomicFare(classFare);
+        double classFare= pricing.priceByDate(flight.getDepartureDate(),flight.getEconomyClass().getEconomicSeatsAvailable(),flight.getEconomyClass().getEconomicClassCapacity(),flight.getBaseFare());
+        flight.getEconomyClass().setEconomicClassFare(classFare);
         return classFare;
     }
     @Override
     public boolean validateSeats(int noOfPass) {
-        return noOfPass < flight.getEconomicSeats();
+        return noOfPass < flight.getEconomyClass().getEconomicSeatsAvailable();
     }
 
+    public void setEconomicClassFare(double economicClassFare) {
+        this.economicClassFare = economicClassFare;
+    }
 
+    public int getEconomicSeatsAvailable() {
+        return economicSeatsAvailable;
+    }
+
+    public double getEconomicClassFare() {
+        return economicClassFare;
+    }
+
+    public int getEconomicClassCapacity() {
+        return economicClassCapacity;
+    }
 }
 
 

@@ -1,16 +1,17 @@
 package com.everest.airline.services;
 
-import com.everest.airline.database.DataParser;
+import com.everest.airline.database.DataReader;
+import com.everest.airline.exceptions.FileNotWrittenException;
 import com.everest.airline.model.FilterClass;
 import com.everest.airline.model.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class BookTicketService {
@@ -18,46 +19,22 @@ public class BookTicketService {
     @Autowired
     public FilterClass filterClass;
 
-    private List<Flight> flightList;
-
-
-    public void bookLogic(File file, String noOfPass, Long number, String flightClass) {
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] strings = line.split(",", -1);
-                if (number.equals(Long.parseLong(strings[0]))) {
-                    Flight flight = new Flight(Long.parseLong(strings[0]), strings[1], strings[2], LocalDate.parse(strings[3]), LocalTime.parse(strings[4]), LocalDate.parse(strings[5]), LocalTime.parse(strings[6]), Integer.parseInt(strings[7]),Integer.parseInt(strings[8]),Integer.parseInt(strings[9]),Integer.parseInt(strings[10]),Integer.parseInt(strings[11]),Integer.parseInt(strings[12]),
-                            Integer.parseInt(strings[13]),Double.parseDouble(strings[14]));
-                    flightList.add(flight);
-                     filterClass.filterFlightClass(flightClass, noOfPass, flightList, number);
-                     line=filterClass.getLine();
-                }
-                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-                bufferedWriter.write(line);
-                bufferedWriter.close();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    @Autowired
+    public DataReader dataReader;
 
     public List<Flight> bookTicket(String noOfPass, Long number, String flightClass) {
-        if (DataParser.multiFileReader() != null) {
-            flightList=new ArrayList<>();
-            isContainFile(noOfPass, number, flightClass);
-        }
-        return flightList;
-    }
-
-    public void isContainFile(String noOfPass, Long number, String flightClass) {
-       for(File file:DataParser.multiFileReader()){
-            if (file.getName().endsWith(".txt")) {
-                bookLogic(file, noOfPass, number, flightClass);
-            }
-        }
+        return dataReader.getFlightsList()
+                .stream().filter(flight -> flight.getNumber()==number)
+                .map(flight -> {
+                    try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("/Volumes/everest/airlines_tdd/airlines/src/main/java/com/everest/airline/Flights/"+flight.getNumber()+".txt"))) {
+                        filterClass.filterFlightClass(flightClass, noOfPass, flight, number);
+                        bufferedWriter.write(filterClass.getLine());
+                        return flight;
+                    } catch (IOException e) {
+                        throw new FileNotWrittenException(e);
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
 }
