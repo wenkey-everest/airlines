@@ -1,21 +1,18 @@
 package com.everest.airline.controllers;
 
-import com.everest.airline.database.DataParser;
 import com.everest.airline.database.DataReader;
 import com.everest.airline.exceptions.FileNotFoundException;
 import com.everest.airline.exceptions.FileNotWrittenException;
-import com.everest.airline.flightClassViews.EconomyClass;
-import com.everest.airline.flightClassViews.FirstClass;
-import com.everest.airline.flightClassViews.SecondClass;
 import com.everest.airline.model.CreateFlight;
 import com.everest.airline.model.Flight;
 import com.everest.airline.model.SortingList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
