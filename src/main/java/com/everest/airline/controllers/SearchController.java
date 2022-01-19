@@ -1,6 +1,7 @@
 package com.everest.airline.controllers;
 
 import com.everest.airline.FileDivider;
+import com.everest.airline.exceptions.FlightNotFoundException;
 import com.everest.airline.model.Flight;
 import com.everest.airline.services.BookTicketService;
 import com.everest.airline.services.SearchService;
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.xml.crypto.Data;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -38,8 +41,7 @@ public class SearchController {
             model.addAttribute("noOfPass",noOfPass);
             return "search";
         } catch (Exception e) {
-            e.printStackTrace();
-            return "noFlight";
+            throw new FlightNotFoundException(LocalDate.parse(departureDate));
         }
     }
 
