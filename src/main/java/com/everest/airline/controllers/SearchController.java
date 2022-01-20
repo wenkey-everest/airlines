@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.xml.crypto.Data;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class SearchController {
     @RequestMapping(value = "/search")
     public String search(String from, String to, Model model, String departureDate,String flightClass, String noOfPass) {
         try {
-            List<Flight> flightList = searchService.searchByFlight(from, to, departureDate,flightClass,noOfPass);
+            List<Flight> flightList = searchService.searchByFlight(from, to, departureDate, flightClass, noOfPass);
             model.addAttribute("flights", flightList);
             model.addAttribute("flightClass",flightClass);
             model.addAttribute("noOfPass",noOfPass);
@@ -46,7 +45,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/{number}/{flightClass}/{noOfPass}")
-    public String book(@PathVariable("number") Long number, @PathVariable("flightClass") String flightClass,@PathVariable("noOfPass") String noOfPass, Model model) {
+    public String book(@PathVariable("number") Long number, @PathVariable("flightClass") String flightClass, @PathVariable("noOfPass") String noOfPass, Model model) {
         if (noOfPass.isEmpty()) {
                 throw new RuntimeException("Please enter number of passengers");
         } else {

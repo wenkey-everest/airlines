@@ -1,6 +1,5 @@
 package com.everest.airline.services;
 
-import com.everest.airline.database.DataParser;
 import com.everest.airline.database.DataReader;
 import com.everest.airline.exceptions.FlightNotFoundException;
 import com.everest.airline.exceptions.SeatsAvailabilityException;
@@ -27,19 +26,17 @@ public class SearchService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return dataReader.getFlightsList().stream()
                 .filter(flight -> {
-                    try {
-                        if (flight.getSource().equalsIgnoreCase(from) && flight.getDestination().equalsIgnoreCase(to) && flight.getDepartureDate().format(formatter).equals(departureDate)) {
-                            filterClass.filterFlightClass(flightClass, noOfPass, flight, flight.getNumber());
-                            try {
-                                return filterClass.isCheck();
-                            } catch (Exception e) {
-                                throw new SeatsAvailabilityException(e);
-                            }
+                    if (flight.getSource().equalsIgnoreCase(from) &&
+                            flight.getDestination().equalsIgnoreCase(to) &&
+                            flight.getDepartureDate().format(formatter).equals(departureDate)) {
+                        filterClass.filterFlightClass(flightClass, noOfPass, flight, flight.getNumber());
+                        try {
+                            return filterClass.isCheck();
+                        } catch (Exception e) {
+                            throw new SeatsAvailabilityException(e);
                         }
-                        return false;
-                    } catch (Exception e) {
+                    } else
                         throw new FlightNotFoundException(flight.getDepartureDate());
-                    }
                 })
                 .sorted(new SortingList())
                 .collect(Collectors.toList());

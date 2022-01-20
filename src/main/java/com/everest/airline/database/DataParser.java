@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Arrays;
+import java.util.Map;
 
 public class DataParser {
     public static BufferedReader singleFileReader() throws FileNotFoundException {
@@ -18,6 +20,7 @@ public class DataParser {
         if(files!=null) return files;
        else throw new DirectoryEmptyException();
     }
+
 
 }
 

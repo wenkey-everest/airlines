@@ -27,6 +27,7 @@ public class FlightsApiController {
 
     @GetMapping({"/flights/{number}", "/flights"})
     public List<Flight> getAllFlights(@PathVariable Optional<String> number) {
+
         return number.map(s -> dataReader.getFlightsList()
                 .stream().filter(flight -> flight.getNumber() == Long.parseLong(s))
                 .sorted(new SortingList())
