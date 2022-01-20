@@ -12,8 +12,6 @@ public class FirstClass implements FlightClass {
     private double firstClassFare;
     private int firstClassCapacity;
 
-    public FirstClass(){}
-
     public FirstClass(int firstClassSeatsAvailable, int firstClassCapacity) {
         this.firstClassSeatsAvailable = firstClassSeatsAvailable;
         this.firstClassCapacity = firstClassCapacity;
