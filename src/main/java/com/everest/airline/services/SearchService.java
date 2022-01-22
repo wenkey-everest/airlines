@@ -1,11 +1,13 @@
 package com.everest.airline.services;
 
+import com.everest.airline.config.DbConfig;
 import com.everest.airline.database.DataReader;
 import com.everest.airline.exceptions.FlightNotFoundException;
 import com.everest.airline.exceptions.SeatsAvailabilityException;
 import com.everest.airline.model.FilterClass;
 import com.everest.airline.model.Flight;
 import com.everest.airline.model.SortingList;
+import com.everest.airline.resultextractors.GetFlight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +26,9 @@ public class SearchService {
 
     public List<Flight> searchByFlight(String from, String to, String departureDate, String flightClass, String noOfPass) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return dataReader.getFlightsList().stream()
+
+
+        return new DbConfig().namedParameterJdbcTemplate().query("select * from flights", new GetFlight()).stream()
                 .filter(flight -> {
                     if (flight.getSource().equalsIgnoreCase(from) &&
                             flight.getDestination().equalsIgnoreCase(to) &&

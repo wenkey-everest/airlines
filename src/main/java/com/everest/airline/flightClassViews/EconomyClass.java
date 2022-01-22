@@ -1,7 +1,11 @@
 package com.everest.airline.flightClassViews;
 
+import com.everest.airline.config.DbConfig;
 import com.everest.airline.model.Flight;
 import com.everest.airline.model.Pricing;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 public class EconomyClass implements FlightClass {
     private int passengers;
@@ -24,10 +28,13 @@ public class EconomyClass implements FlightClass {
 
     @Override
     public String setLine() {
+        NamedParameterJdbcTemplate jdbcTemplate = new DbConfig().namedParameterJdbcTemplate();
         int economicSeats = flight.getEconomyClass().getEconomicSeatsAvailable()- passengers;
-        int secondClassSeats = flight.getSecondClass().getSecondClassSeatsAvailable();
-        int firstClassSeats = flight.getFirstClass().getFirstClassSeatsAvailable();
-        line = flight.flightString(passengers,economicSeats,secondClassSeats,firstClassSeats);
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("economicSeatsAvaliable",economicSeats)
+                .addValue("number", flight.getNumber());
+        String sql = "update flights set economic_seats_avaliable=:economicSeatsAvaliable where flight_number=:number";
+        jdbcTemplate.update(sql,sqlParameterSource);
         return line;
     }
     @Override
