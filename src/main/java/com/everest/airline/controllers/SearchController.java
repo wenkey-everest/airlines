@@ -1,6 +1,7 @@
 package com.everest.airline.controllers;
 
 import com.everest.airline.FileDivider;
+import com.everest.airline.database.DataParser;
 import com.everest.airline.exceptions.FlightNotFoundException;
 import com.everest.airline.model.Flight;
 import com.everest.airline.services.BookTicketService;

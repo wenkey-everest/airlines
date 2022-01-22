@@ -35,6 +35,7 @@ public class FirstClass implements FlightClass {
         totalCost = classFareBySeats()*passengers;
         flight.setTotalFare(totalCost);
     }
+
     @Override
     public double classFareBySeats(){
         Pricing pricing = new Pricing();
