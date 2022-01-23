@@ -27,15 +27,16 @@ public class EconomyClass implements FlightClass {
     }
 
     @Override
-    public String setLine() {
+    public void setLine() {
         NamedParameterJdbcTemplate jdbcTemplate = new DbConfig().namedParameterJdbcTemplate();
         int economicSeats = flight.getEconomyClass().getEconomicSeatsAvailable()- passengers;
+        int avaliableSeats = flight.getAvailableSeats()-passengers;
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue("economicSeatsAvaliable",economicSeats)
-                .addValue("number", flight.getNumber());
-        String sql = "update flights set economic_seats_avaliable=:economicSeatsAvaliable where flight_number=:number";
+                .addValue("number", flight.getNumber())
+                .addValue("availableSeats", avaliableSeats);
+        String sql = "update flights set economic_seats_avaliable=:economicSeatsAvaliable, available_seats=:availableSeats where flight_number=:number";
         jdbcTemplate.update(sql,sqlParameterSource);
-        return line;
     }
     @Override
     public void totalCost(int passengers) {

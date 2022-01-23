@@ -3,7 +3,7 @@ package com.everest.airline.flightClassViews;
 
 public interface FlightClass {
 
-  String setLine();
+  void setLine();
 
   void totalCost(int passengers);
 

@@ -17,32 +17,27 @@ public class FilterClass {
                     case "economic":
                         FlightClass economyClass = new EconomyClass(passengers, flight);
                         check = economyClass.validateSeats(passengers);
-                        line = economyClass.setLine();
+                        economyClass.setLine();
                         economyClass.totalCost(passengers);
                         break;
                     case "firstClass":
                        FlightClass firstClass = new FirstClass(passengers,flight);
                         check = firstClass.validateSeats(passengers);
-                        line=firstClass.setLine();
+                        firstClass.setLine();
                         firstClass.totalCost(passengers);
                         break;
                     case "secondClass":
                         FlightClass secondClass = new SecondClass(passengers,flight);
                         check = secondClass.validateSeats(passengers);
-                        line=secondClass.setLine();
+                        secondClass.setLine();
                         secondClass.totalCost(passengers);
                         break;
                 }
             }
     }
 
-    
     public boolean isCheck() {
         return check;
-    }
-
-    public String getLine() {
-        return line;
     }
 
 }

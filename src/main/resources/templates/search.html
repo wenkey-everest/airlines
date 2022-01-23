@@ -39,9 +39,8 @@
             <td th:if="${flightClass} == 'firstClass'" th:text="${flight.firstClass.getFirstClassFare()}" ></td>
             <td th:if="${flightClass} == 'secondClass'" th:text="${flight.secondClass.getSecondClassFare()}"></td>
             <td th:text="${flight.getTotalFare()}"></td>
-
             <form th:action="@{'/' + ${flight.number}+'/'+${flightClass}+'/'+${noOfPass}}" th:method="post">
-                <td><input type="submit" id="book" value="book Ticket"/></td>
+            <td><input type="submit" id="book" value="book Ticket"/></td>
             </form>
         </tr>
     </table>

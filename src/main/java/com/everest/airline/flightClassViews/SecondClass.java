@@ -1,7 +1,11 @@
 package com.everest.airline.flightClassViews;
 
+import com.everest.airline.config.DbConfig;
 import com.everest.airline.model.Flight;
 import com.everest.airline.model.Pricing;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 public class SecondClass implements FlightClass{
     private int passengers;
@@ -23,12 +27,16 @@ public class SecondClass implements FlightClass{
     }
 
     @Override
-    public String setLine() {
-        int economicSeats = flight.getEconomyClass().getEconomicSeatsAvailable();
-        int secondClassSeats = flight.getSecondClass().getSecondClassSeatsAvailable() - passengers;
-        int firstClassSeats = flight.getFirstClass().getFirstClassSeatsAvailable();
-        line = flight.flightString(passengers,economicSeats,secondClassSeats,firstClassSeats);
-        return line;
+    public void setLine() {
+        NamedParameterJdbcTemplate jdbcTemplate = new DbConfig().namedParameterJdbcTemplate();
+        int secondClassSeats = flight.getSecondClass().getSecondClassSeatsAvailable()- passengers;
+        int avaliableSeats = flight.getAvailableSeats()-passengers;
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("secondClassSeats",secondClassSeats)
+                .addValue("number", flight.getNumber())
+                .addValue("availableSeats", avaliableSeats);
+        String sql = "update flights set secondclass_seats_avaliable=:secondClassSeats, available_seats=:availableSeats where flight_number=:number";
+        jdbcTemplate.update(sql,sqlParameterSource);
     }
 
     @Override

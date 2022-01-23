@@ -22,7 +22,7 @@ public class Flight {
     private SecondClass secondClass;
     private FirstClass firstClass;
 
-    public Flight(long number, String source, String destination, LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, int availableSeats, EconomyClass economyClass,SecondClass secondClass, FirstClass firstClass, double baseFare) {
+    public Flight(long number, String source, String destination, LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, int availableSeats, EconomyClass economyClass, SecondClass secondClass, FirstClass firstClass, double baseFare) {
         this.number = number;
         this.source = source;
         this.destination = destination;
@@ -35,10 +35,6 @@ public class Flight {
         this.secondClass=secondClass;
         this.firstClass=firstClass;
         this.baseFare = baseFare;
-    }
-
-    public String flightString(int noOfPass, int economicClassSeats, int firstClassSeats, int secondClassSeats){
-        return getNumber()+","+getSource()+","+getDestination()+","+getDepartureDate()+","+getDepartureTime()+","+getArrivalDate()+","+getArrivalTime()+","+(getAvailableSeats()-noOfPass)+","+ economicClassSeats+","+ secondClassSeats+","+ firstClassSeats+","+ economyClass.getEconomicClassCapacity()+","+ secondClass.getSecondClassCapacity()+","+ firstClass.getFirstClassCapacity()+","+getBaseFare();
     }
 
     public String getDestination() {
@@ -98,4 +94,6 @@ public class Flight {
     public LocalTime getArrivalTime() {
         return arrivalTime;
     }
+
+
 }

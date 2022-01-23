@@ -1,7 +1,6 @@
 package com.everest.airline.controllers;
 
-import com.everest.airline.FileDivider;
-import com.everest.airline.database.DataParser;
+
 import com.everest.airline.exceptions.FlightNotFoundException;
 import com.everest.airline.model.Flight;
 import com.everest.airline.services.BookTicketService;
@@ -21,28 +20,20 @@ public class SearchController {
     public SearchService searchService;
 
     @Autowired
-    public FileDivider fileDivider;
-
-    @Autowired
     public BookTicketService bookTicketService;
 
     @RequestMapping(value = "/")
     public String home() {
-       fileDivider.testFileDivider();
         return "home";
     }
 
     @RequestMapping(value = "/search")
     public String search(String from, String to, Model model, String departureDate,String flightClass, String noOfPass) {
-        try {
             List<Flight> flightList = searchService.searchByFlight(from, to, departureDate, flightClass, noOfPass);
             model.addAttribute("flights", flightList);
-            model.addAttribute("flightClass",flightClass);
-            model.addAttribute("noOfPass",noOfPass);
+            model.addAttribute("flightClass", flightClass);
+            model.addAttribute("noOfPass", noOfPass);
             return "search";
-        } catch (Exception e) {
-            throw new FlightNotFoundException(LocalDate.parse(departureDate));
-        }
     }
 
     @RequestMapping(value = "/{number}/{flightClass}/{noOfPass}")

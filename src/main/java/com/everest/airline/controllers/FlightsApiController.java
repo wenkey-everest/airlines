@@ -1,11 +1,9 @@
 package com.everest.airline.controllers;
 
 import com.everest.airline.config.DbConfig;
-import com.everest.airline.database.DataReader;
 import com.everest.airline.model.Flight;
-import com.everest.airline.model.SortingList;
 import com.everest.airline.resultextractors.GetFlight;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.everest.airline.resultextractors.GetLastIndex;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -19,13 +17,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 public class FlightsApiController {
 
-    @Autowired
-    public DataReader dataReader;
 
     private final DbConfig dbConfig = new DbConfig();
 
@@ -44,10 +39,9 @@ public class FlightsApiController {
     //     CUD
     @PostMapping("/flights")
     public ResponseEntity<String> create(String source, String destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime, String availableSeats, String economicSeatsAvailable, String secondClassSeatsAvailable, String firstClassSeatsAvailable, String economicClassCapacity, String secondClassCapacity, String firstClassCapacity, String baseFare) {
-        List<Flight> flightsList = new DataReader().getFlightsList().stream().sorted(new SortingList()).collect(Collectors.toList());
-        long lastId = flightsList.get(flightsList.size() - 1).getNumber();
+        List<Long> value = npJdbcTemplate.query("select max(flight_number) from flights", new GetLastIndex());
         SqlParameterSource parmSource = new MapSqlParameterSource()
-                .addValue("flight_number",  lastId+1)
+                .addValue("flight_number",  value.get(0)+1)
                 .addValue("source", source)
                 .addValue("destination", destination)
                 .addValue("departure_date", departureDate)
@@ -63,6 +57,7 @@ public class FlightsApiController {
                 .addValue("firstclass_capacity", firstClassCapacity)
                 .addValue("basefare", baseFare);
         KeyHolder keyHolder = new GeneratedKeyHolder();
+
         String insertSql = "INSERT INTO flights VALUES (:flight_number,:source,:destination,:departure_date, :departure_time," +
                 ":arrival_date,:arrival_time,:available_seats,:economic_seats_avaliable,:secondclass_seats_avaliable,:firstclass_seats_avaliable," +
                 ":economic_capacity,:secondclass_capacity,:firstclass_capacity,:basefare)";

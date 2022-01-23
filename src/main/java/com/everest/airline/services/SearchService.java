@@ -1,7 +1,6 @@
 package com.everest.airline.services;
 
 import com.everest.airline.config.DbConfig;
-import com.everest.airline.database.DataReader;
 import com.everest.airline.exceptions.FlightNotFoundException;
 import com.everest.airline.exceptions.SeatsAvailabilityException;
 import com.everest.airline.model.FilterClass;
@@ -21,13 +20,9 @@ public class SearchService {
     @Autowired
     public FilterClass filterClass;
 
-    @Autowired
-    public DataReader dataReader;
 
     public List<Flight> searchByFlight(String from, String to, String departureDate, String flightClass, String noOfPass) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-
         return new DbConfig().namedParameterJdbcTemplate().query("select * from flights", new GetFlight()).stream()
                 .filter(flight -> {
                     if (flight.getSource().equalsIgnoreCase(from) &&
