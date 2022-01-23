@@ -12,6 +12,7 @@
 #### Story - 7 : Search should display total fare.
 #### Story - 8 : Different pricing strategies.
 #### Story - 9 : percentage based on dates.
+#### Story - 10 : connect to mySql database
 
 ## Setup :
 
