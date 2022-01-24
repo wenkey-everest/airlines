@@ -1,10 +1,12 @@
-package com.everest.airline.model;
+package com.everest.airline.actionfilters;
+
+import com.everest.airline.model.Flight;
+import com.everest.airline.model.FlightClassView;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class FilterClass {
-
 
     private FlightClassView economic;
     private FlightClassView firstClass;

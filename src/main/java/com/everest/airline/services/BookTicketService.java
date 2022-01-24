@@ -2,9 +2,8 @@ package com.everest.airline.services;
 
 import com.everest.airline.dbconfig.DbConfig;
 import com.everest.airline.model.Flight;
-import com.everest.airline.model.FilterClass;
+import com.everest.airline.actionfilters.FilterClass;
 import com.everest.airline.resultextractors.FlightRowMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 

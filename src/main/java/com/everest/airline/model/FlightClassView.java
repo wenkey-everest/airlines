@@ -1,6 +1,7 @@
 package com.everest.airline.model;
 
 import com.everest.airline.dbconfig.DbConfig;
+import com.everest.airline.stratergies.PricingStrategy;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;

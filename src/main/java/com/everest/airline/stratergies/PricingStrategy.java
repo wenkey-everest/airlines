@@ -1,4 +1,4 @@
-package com.everest.airline.model;
+package com.everest.airline.stratergies;
 
 import java.time.Duration;
 import java.time.LocalDate;

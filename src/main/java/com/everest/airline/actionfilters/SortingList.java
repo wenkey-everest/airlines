@@ -1,4 +1,6 @@
-package com.everest.airline.model;
+package com.everest.airline.actionfilters;
+
+import com.everest.airline.model.Flight;
 
 import java.util.Comparator;
 

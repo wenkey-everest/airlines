@@ -4,8 +4,8 @@ import com.everest.airline.dbconfig.DbConfig;
 import com.everest.airline.exceptions.NonThrowableException;
 import com.everest.airline.exceptions.ThrowableException;
 import com.everest.airline.model.Flight;
-import com.everest.airline.model.SortingList;
-import com.everest.airline.model.FilterClass;
+import com.everest.airline.actionfilters.SortingList;
+import com.everest.airline.actionfilters.FilterClass;
 import com.everest.airline.resultextractors.FlightRowMapper;
 import org.springframework.stereotype.Component;
 
