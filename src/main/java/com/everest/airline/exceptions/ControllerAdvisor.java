@@ -13,39 +13,21 @@ import java.util.Map;
 
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
-    @ExceptionHandler(DatabaseEmptyException.class)
-    public ResponseEntity<Object> handleDirectoryNotFoundException(
-            DatabaseEmptyException ex, WebRequest request) {
-
+    @ExceptionHandler(NonThrowableException.class)
+    public ResponseEntity<Object> handleNonThrowableException(NonThrowableException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", "Directory is empty");
-
+        body.put("message", "Error input of passengers or flight is not found");
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
 
     }
 
-    @ExceptionHandler(FlightNotFoundException.class)
-    public ResponseEntity<Object> handleFlightNotFoundException(FlightNotFoundException ex, WebRequest request) {
+    @ExceptionHandler(ThrowableException.class)
+    public ResponseEntity<Object> handleThrowableException(ThrowableException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", "Flight is not found");
+        body.put("message", "Error with seats availability or with Database is empty");
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(SeatsAvailabilityException.class)
-    public ResponseEntity<Object> handleSeatsAvailabilityException(SeatsAvailabilityException ex, WebRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", "Entered seats are not available");
-        return new ResponseEntity<>(body, HttpStatus.NOT_ACCEPTABLE);
-    }
-
-    @ExceptionHandler(ValidNoOfPassException.class)
-    public ResponseEntity<Object> handleValidNoOfPassException(ValidNoOfPassException ex, WebRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", "Seats are not available");
-        return new ResponseEntity<>(body, HttpStatus.NOT_ACCEPTABLE);
-    }
 }

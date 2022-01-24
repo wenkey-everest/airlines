@@ -1,6 +1,8 @@
 package com.everest.airline.controllers;
 
 
+import com.everest.airline.exceptions.NonThrowableException;
+import com.everest.airline.exceptions.ThrowableException;
 import com.everest.airline.model.Flight;
 import com.everest.airline.services.BookTicketService;
 import com.everest.airline.services.SearchService;
@@ -37,7 +39,7 @@ public class SearchController {
     @RequestMapping(value = "/{number}/{flightClass}/{noOfPass}")
     public String book(@PathVariable("number") Long number, @PathVariable("flightClass") String flightClass, @PathVariable("noOfPass") String noOfPass, Model model) {
         if (noOfPass.isEmpty()) {
-            throw new RuntimeException("Please enter number of passengers");
+            throw new NonThrowableException("Please enter valid number of passengers");
         } else {
             List<Flight> flightList = bookTicketService.bookTicket(noOfPass, number, flightClass);
             model.addAttribute("flights", flightList);

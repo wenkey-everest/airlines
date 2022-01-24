@@ -55,7 +55,7 @@ public class FilterClass {
         return FlightClassMap;
     }
 
-    public void testExecute(String flightClass) {
+    public void testExecute() {
         FlightClassMap().get(flightClass).updateSeats(dbColumnNameMap().get(flightClass));
     }
 

@@ -1,6 +1,6 @@
 package com.everest.airline.resultextractors;
 
-import com.everest.airline.exceptions.DatabaseEmptyException;
+import com.everest.airline.exceptions.ThrowableException;
 import com.everest.airline.model.Flight;
 import com.everest.airline.model.ClassSeats;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,7 +19,7 @@ public class FlightRowMapper implements RowMapper<Flight> {
             ClassSeats secondClass = new ClassSeats(rs.getInt("secondclass_seats_avaliable"), rs.getInt("secondclass_capacity"));
             return new Flight(rs.getLong("flight_number"), rs.getString("source"), rs.getString("destination"), rs.getDate("departure_date").toLocalDate(), rs.getTime("departure_time").toLocalTime(), rs.getDate("arrival_date").toLocalDate(), rs.getTime("arrival_time").toLocalTime(), rs.getInt("available_seats"), economyClass, secondClass, firstClass, rs.getFloat("basefare"));
         } catch (Exception e) {
-            throw new DatabaseEmptyException();
+            throw new ThrowableException("Database is empty, Please insert database in dbConfig", e);
         }
     }
 }
