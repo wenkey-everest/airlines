@@ -1,6 +1,6 @@
 package com.everest.airline.controllers;
 
-import com.everest.airline.config.DbConfig;
+import com.everest.airline.dbconfig.DbConfig;
 import com.everest.airline.model.Flight;
 import com.everest.airline.resultextractors.GetFlight;
 import com.everest.airline.resultextractors.GetLastIndex;

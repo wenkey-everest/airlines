@@ -25,22 +25,6 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
     }
 
-    @ExceptionHandler(FileNotFoundException.class)
-    public ResponseEntity<Object> handleFileNotFoundException(FileNotFoundException ex, WebRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", "File is not found");
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(FileNotWrittenException.class)
-    public ResponseEntity<Object> handleFileNotWrittenException(FileNotWrittenException ex, WebRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", "File is not written");
-        return new ResponseEntity<>(body, HttpStatus.NO_CONTENT);
-    }
-
     @ExceptionHandler(FlightNotFoundException.class)
     public ResponseEntity<Object> handleFlightNotFoundException(FlightNotFoundException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();

@@ -30,14 +30,14 @@
             <td th:text="${flight.departureTime}"></td>
             <td th:text="${flight.arrivalDate}"></td>
             <td th:text="${flight.arrivalTime}"></td>
-            <td th:if="${flightClass} == 'economic'" th:text="${flight.economyClass.getEconomicSeatsAvailable()}"></td>
-            <td th:if="${flightClass} == 'firstClass'" th:text="${flight.firstClass.getFirstClassSeatsAvailable()}" ></td>
-            <td th:if="${flightClass} == 'secondClass'" th:text="${flight.secondClass.getSecondClassSeatsAvailable()}"></td>
+            <td th:if="${flightClass} == 'economic'" th:text="${flight.economyClass.getSeatsAvailable()}"></td>
+            <td th:if="${flightClass} == 'firstClass'" th:text="${flight.firstClass.getSeatsAvailable()}" ></td>
+            <td th:if="${flightClass} == 'secondClass'" th:text="${flight.secondClass.getSeatsAvailable()}"></td>
             <td th:text="${flightClass}"></td>
             <td th:text="${noOfPass}"></td>
-            <td th:if="${flightClass} == 'economic'" th:text="${flight.economyClass.getEconomicClassFare()}"></td>
-            <td th:if="${flightClass} == 'firstClass'" th:text="${flight.firstClass.getFirstClassFare()}" ></td>
-            <td th:if="${flightClass} == 'secondClass'" th:text="${flight.secondClass.getSecondClassFare()}"></td>
+            <td th:if="${flightClass} == 'economic'" th:text="${flight.economyClass.getClassFare()}"></td>
+            <td th:if="${flightClass} == 'firstClass'" th:text="${flight.firstClass.getClassFare()}" ></td>
+            <td th:if="${flightClass} == 'secondClass'" th:text="${flight.secondClass.getClassFare()}"></td>
             <td th:text="${flight.getTotalFare()}"></td>
             <form th:action="@{'/' + ${flight.number}+'/'+${flightClass}+'/'+${noOfPass}}" th:method="post">
             <td><input type="submit" id="book" value="book Ticket"/></td>

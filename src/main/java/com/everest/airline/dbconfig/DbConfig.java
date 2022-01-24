@@ -1,4 +1,4 @@
-package com.everest.airline.config;
+package com.everest.airline.dbconfig;
 
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

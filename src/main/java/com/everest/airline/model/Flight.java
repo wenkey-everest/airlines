@@ -1,9 +1,5 @@
 package com.everest.airline.model;
 
-import com.everest.airline.flightClassViews.EconomyClass;
-import com.everest.airline.flightClassViews.FirstClass;
-import com.everest.airline.flightClassViews.SecondClass;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -18,11 +14,11 @@ public class Flight {
     private int availableSeats;
     private double totalFare;
     private double baseFare;
-    private EconomyClass economyClass;
-    private SecondClass secondClass;
-    private FirstClass firstClass;
+    private ClassSeats economyClass;
+    private ClassSeats secondClass;
+    private ClassSeats firstClass;
 
-    public Flight(long number, String source, String destination, LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, int availableSeats, EconomyClass economyClass, SecondClass secondClass, FirstClass firstClass, double baseFare) {
+    public Flight(long number, String source, String destination, LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, int availableSeats, ClassSeats economyClass, ClassSeats secondClass, ClassSeats firstClass, double baseFare) {
         this.number = number;
         this.source = source;
         this.destination = destination;
@@ -75,15 +71,15 @@ public class Flight {
         return baseFare;
     }
 
-    public EconomyClass getEconomyClass() {
+    public ClassSeats getEconomyClass() {
         return economyClass;
     }
 
-    public SecondClass getSecondClass() {
+    public ClassSeats getSecondClass() {
         return secondClass;
     }
 
-    public FirstClass getFirstClass() {
+    public ClassSeats getFirstClass() {
         return firstClass;
     }
 
