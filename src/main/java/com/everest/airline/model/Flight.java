@@ -23,13 +23,13 @@ public class Flight {
         this.source = source;
         this.destination = destination;
         this.departureDate = departureDate;
-        this.departureTime=departureTime;
-        this.arrivalDate=arrivalDate;
-        this.arrivalTime=arrivalTime;
-        this.availableSeats=availableSeats;
-        this.economyClass=economyClass;
-        this.secondClass=secondClass;
-        this.firstClass=firstClass;
+        this.departureTime = departureTime;
+        this.arrivalDate = arrivalDate;
+        this.arrivalTime = arrivalTime;
+        this.availableSeats = availableSeats;
+        this.economyClass = economyClass;
+        this.secondClass = secondClass;
+        this.firstClass = firstClass;
         this.baseFare = baseFare;
     }
 

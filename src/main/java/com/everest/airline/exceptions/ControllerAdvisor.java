@@ -13,9 +13,9 @@ import java.util.Map;
 
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
-    @ExceptionHandler(DirectoryEmptyException.class)
+    @ExceptionHandler(DatabaseEmptyException.class)
     public ResponseEntity<Object> handleDirectoryNotFoundException(
-            DirectoryEmptyException ex, WebRequest request) {
+            DatabaseEmptyException ex, WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());

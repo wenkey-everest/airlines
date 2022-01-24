@@ -1,6 +1,6 @@
 package com.everest.airline.resultextractors;
 
-import com.everest.airline.exceptions.DirectoryEmptyException;
+import com.everest.airline.exceptions.DatabaseEmptyException;
 import com.everest.airline.model.Flight;
 import com.everest.airline.model.ClassSeats;
 import org.springframework.jdbc.core.RowMapper;
@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class GetFlight implements RowMapper<Flight> {
+public class FlightRowMapper implements RowMapper<Flight> {
 
     @Override
     public Flight mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -18,8 +18,8 @@ public class GetFlight implements RowMapper<Flight> {
             ClassSeats firstClass = new ClassSeats(rs.getInt("firstclass_seats_avaliable"), rs.getInt("firstclass_capacity"));
             ClassSeats secondClass = new ClassSeats(rs.getInt("secondclass_seats_avaliable"), rs.getInt("secondclass_capacity"));
             return new Flight(rs.getLong("flight_number"), rs.getString("source"), rs.getString("destination"), rs.getDate("departure_date").toLocalDate(), rs.getTime("departure_time").toLocalTime(), rs.getDate("arrival_date").toLocalDate(), rs.getTime("arrival_time").toLocalTime(), rs.getInt("available_seats"), economyClass, secondClass, firstClass, rs.getFloat("basefare"));
-        }catch (Exception e){
-            throw new DirectoryEmptyException();
+        } catch (Exception e) {
+            throw new DatabaseEmptyException();
         }
     }
 }

@@ -27,21 +27,21 @@ public class SearchController {
 
     @RequestMapping(value = "/search")
     public String search(String from, String to, Model model, String departureDate, String flightClass, String noOfPass) {
-            List<Flight> flightList = searchService.searchByFlight(from, to, departureDate, flightClass, noOfPass);
-            model.addAttribute("flights", flightList);
-            model.addAttribute("flightClass", flightClass);
-            model.addAttribute("noOfPass", noOfPass);
-            return "search";
+        List<Flight> flightList = searchService.searchByFlight(from, to, departureDate, flightClass, noOfPass);
+        model.addAttribute("flights", flightList);
+        model.addAttribute("flightClass", flightClass);
+        model.addAttribute("noOfPass", noOfPass);
+        return "search";
     }
 
     @RequestMapping(value = "/{number}/{flightClass}/{noOfPass}")
     public String book(@PathVariable("number") Long number, @PathVariable("flightClass") String flightClass, @PathVariable("noOfPass") String noOfPass, Model model) {
         if (noOfPass.isEmpty()) {
-                throw new RuntimeException("Please enter number of passengers");
+            throw new RuntimeException("Please enter number of passengers");
         } else {
-                List<Flight> flightList = bookTicketService.bookTicket(noOfPass, number, flightClass);
-                model.addAttribute("flights", flightList);
-                return "book";
+            List<Flight> flightList = bookTicketService.bookTicket(noOfPass, number, flightClass);
+            model.addAttribute("flights", flightList);
+            return "book";
         }
     }
 

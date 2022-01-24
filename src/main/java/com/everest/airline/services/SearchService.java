@@ -6,7 +6,7 @@ import com.everest.airline.exceptions.SeatsAvailabilityException;
 import com.everest.airline.model.Flight;
 import com.everest.airline.model.SortingList;
 import com.everest.airline.model.FilterClass;
-import com.everest.airline.resultextractors.GetFlight;
+import com.everest.airline.resultextractors.FlightRowMapper;
 import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
@@ -19,12 +19,12 @@ public class SearchService {
 
     public List<Flight> searchByFlight(String from, String to, String departureDate, String flightClass, String noOfPass) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return new DbConfig().namedParameterJdbcTemplate().query("select * from flights", new GetFlight()).stream()
+        return new DbConfig().namedParameterJdbcTemplate().query("select * from flights", new FlightRowMapper()).stream()
                 .filter(flight -> {
                     if (flight.getSource().equalsIgnoreCase(from) &&
                             flight.getDestination().equalsIgnoreCase(to) &&
                             flight.getDepartureDate().format(formatter).equals(departureDate)) {
-                       FilterClass filterClass = new FilterClass(noOfPass, flight, flightClass);
+                        FilterClass filterClass = new FilterClass(noOfPass, flight, flightClass);
                         try {
                             return filterClass.filterFlightClass();
                         } catch (Exception e) {
