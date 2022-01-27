@@ -91,5 +91,4 @@ public class Flight {
         return arrivalTime;
     }
 
-
 }

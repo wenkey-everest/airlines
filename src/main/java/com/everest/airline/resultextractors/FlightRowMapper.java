@@ -22,4 +22,5 @@ public class FlightRowMapper implements RowMapper<Flight> {
             throw new ThrowableException("Database is empty, Please insert database in dbConfig", e);
         }
     }
+
 }

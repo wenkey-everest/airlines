@@ -1,7 +1,9 @@
 package com.everest.airline.actionfilters;
 
+import com.everest.airline.enums.ClassType;
 import com.everest.airline.model.Flight;
 import com.everest.airline.model.FlightClassView;
+import com.everest.airline.model.ClassProp;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,47 +20,16 @@ public class FilterClass {
         this.flightClass = flightClass;
         this.passengers = Integer.parseInt(noOfPass);
         this.economic = new FlightClassView(passengers, flight.getEconomyClass(), flight);
-        this.firstClass = new FlightClassView(passengers, flight.getEconomyClass(), flight);
+        this.firstClass = new FlightClassView(passengers, flight.getFirstClass(), flight);
         this.secondClass = new FlightClassView(passengers, flight.getSecondClass(), flight);
     }
 
-    public boolean filterFlightClass() {
-        boolean check = false;
-        switch (flightClass) {
-            case "economic":
-                check = economic.validateSeats(passengers);
-                economic.totalCost(passengers);
-                break;
-            case "firstClass":
-                check = firstClass.validateSeats(passengers);
-                firstClass.totalCost(passengers);
-                break;
-            case "secondClass":
-                check = secondClass.validateSeats(passengers);
-                secondClass.totalCost(passengers);
-                break;
-        }
-        return check;
-    }
-
-    private Map<String, String> dbColumnNameMap() {
-        Map<String, String> dbColumnNameMap = new HashMap<>();
-        dbColumnNameMap.put("economic", "economic_seats_avaliable");
-        dbColumnNameMap.put("firstClass", "firstclass_seats_avaliable");
-        dbColumnNameMap.put("secondClass", "secondclass_seats_avaliable");
-        return dbColumnNameMap;
-    }
-
-    private Map<String, FlightClassView> FlightClassMap() {
-        Map<String, FlightClassView> FlightClassMap = new HashMap<>();
-        FlightClassMap.put("economic", economic);
-        FlightClassMap.put("firstClass", firstClass);
-        FlightClassMap.put("secondClass", secondClass);
-        return FlightClassMap;
-    }
-
-    public void testExecute() {
-        FlightClassMap().get(flightClass).updateSeats(dbColumnNameMap().get(flightClass));
+    public Map<String, ClassProp> classTypeMap() {
+        Map<String, ClassProp> flightClassMap = new HashMap<>();
+        flightClassMap.put(ClassType.ECONOMIC.getString(), new ClassProp("economic_seats_avaliable", economic));
+        flightClassMap.put(ClassType.FIRSTCLASS.getString(), new ClassProp("firstclass_seats_avaliable", firstClass));
+        flightClassMap.put(ClassType.SECONDCLASS.getString(), new ClassProp("secondclass_seats_avaliable", secondClass));
+        return flightClassMap;
     }
 
 }

@@ -16,6 +16,7 @@ import java.util.List;
 
 @Controller
 public class SearchController {
+
     @Autowired
     public SearchService searchService;
 
@@ -40,11 +41,11 @@ public class SearchController {
     public String book(@PathVariable("number") Long number, @PathVariable("flightClass") String flightClass, @PathVariable("noOfPass") String noOfPass, Model model) {
         if (noOfPass.isEmpty()) {
             throw new NonThrowableException("Please enter valid number of passengers");
-        } else {
+        }
             List<Flight> flightList = bookTicketService.bookTicket(noOfPass, number, flightClass);
             model.addAttribute("flights", flightList);
             return "book";
-        }
+
     }
 
 }

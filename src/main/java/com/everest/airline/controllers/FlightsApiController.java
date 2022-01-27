@@ -1,6 +1,6 @@
 package com.everest.airline.controllers;
 
-import com.everest.airline.dbconfig.DbConfig;
+import com.everest.airline.config.AppConfig;
 import com.everest.airline.model.Flight;
 import com.everest.airline.resultextractors.FlightRowMapper;
 import com.everest.airline.resultextractors.LastIndexRowMapper;
@@ -22,9 +22,9 @@ import java.util.Optional;
 @RestController
 public class FlightsApiController {
 
-    private final DbConfig dbConfig = new DbConfig();
+    private final AppConfig appConfig = new AppConfig();
 
-    private final NamedParameterJdbcTemplate npJdbcTemplate = dbConfig.namedParameterJdbcTemplate();
+    private final NamedParameterJdbcTemplate npJdbcTemplate = appConfig.namedParameterJdbcTemplate();
 
     @GetMapping({"/flights/{number}", "/flights"})
     public List<Flight> getAllFlights(@PathVariable Optional<String> number) {
@@ -32,7 +32,7 @@ public class FlightsApiController {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("number", number.get());
             return npJdbcTemplate.query("select * from flights where flight_number = :number", map, new FlightRowMapper());
-        } else
+        }
             return npJdbcTemplate.query("select * from flights", new FlightRowMapper());
     }
 

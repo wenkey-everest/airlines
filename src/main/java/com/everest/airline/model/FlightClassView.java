@@ -1,6 +1,6 @@
 package com.everest.airline.model;
 
-import com.everest.airline.dbconfig.DbConfig;
+import com.everest.airline.config.AppConfig;
 import com.everest.airline.stratergies.PricingStrategy;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -19,7 +19,7 @@ public class FlightClassView {
     }
 
     public int updateSeats(String dbColumn) {
-        NamedParameterJdbcTemplate jdbcTemplate = new DbConfig().namedParameterJdbcTemplate();
+        NamedParameterJdbcTemplate jdbcTemplate = new AppConfig().namedParameterJdbcTemplate();
         int classSeats = flightClass.getSeatsAvailable() - passengers;
         int avaliableSeats = flight.getAvailableSeats() - passengers;
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
@@ -30,8 +30,8 @@ public class FlightClassView {
         return jdbcTemplate.update(sql, sqlParameterSource);
     }
 
-    public void totalCost(int passengers) {
-        totalCost = classFareBySeats() * passengers;
+    public void totalCost(String passengers) {
+        totalCost = classFareBySeats() * Integer.parseInt(passengers);
         flight.setTotalFare(totalCost);
     }
 
@@ -42,8 +42,8 @@ public class FlightClassView {
         return classFare;
     }
 
-    public boolean validateSeats(int noOfPass) {
-        return noOfPass < flightClass.getSeatsAvailable();
+    public boolean validateSeats(String noOfPass) {
+        return Integer.parseInt(noOfPass) < flightClass.getSeatsAvailable();
     }
 
 }

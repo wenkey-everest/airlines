@@ -1,4 +1,4 @@
-package com.everest.airline.dbconfig;
+package com.everest.airline.config;
 
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -6,7 +6,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
-public class DbConfig {
+public class AppConfig {
     private String url = "jdbc:mysql://127.0.0.1:3306/flights_database";
     private String user = "root";
     private String password = "";
