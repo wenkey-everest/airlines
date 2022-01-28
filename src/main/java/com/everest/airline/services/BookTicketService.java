@@ -21,7 +21,7 @@ public class BookTicketService {
                 .stream().filter(flight -> flight.getNumber() == number)
                 .peek(flight -> {
                    FilterClass filterClass= new FilterClass(noOfPass,flight,flightClass);
-                   ClassProp classProp = filterClass.classTypeMap().get(flightClass);
+                   ClassProp classProp = filterClass.classTypeMap();
                    classProp.getFlightClassView().updateSeats(classProp.getDbColumnName());
                 })
                 .collect(Collectors.toList());

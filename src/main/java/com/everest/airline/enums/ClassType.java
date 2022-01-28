@@ -1,7 +1,7 @@
 package com.everest.airline.enums;
 
 public enum ClassType {
-    ECONOMIC("economic"), FIRSTCLASS("firstClass"), SECONDCLASS("secondClass");
+    ECONOMIC("economic_seats_avaliable"), FIRSTCLASS("firstclass_seats_avaliable"), SECONDCLASS("secondclass_seats_avaliable");
 
     private String string;
 

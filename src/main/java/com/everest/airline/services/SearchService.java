@@ -32,7 +32,7 @@ public class SearchService {
                             flight.getDepartureDate().format(formatter).equals(departureDate)) {
                         FilterClass filterClass = new FilterClass(noOfPass, flight, flightClass);
                         try {
-                            ClassProp classProp = filterClass.classTypeMap().get(flightClass);
+                            ClassProp classProp = filterClass.classTypeMap();
                             classProp.getFlightClassView().totalCost(noOfPass);
                             return classProp.getFlightClassView().validateSeats(noOfPass);
                         } catch (Exception e) {

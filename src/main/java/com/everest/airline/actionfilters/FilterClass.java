@@ -1,10 +1,11 @@
 package com.everest.airline.actionfilters;
 
 import com.everest.airline.enums.ClassType;
+import com.everest.airline.model.ClassProp;
 import com.everest.airline.model.Flight;
 import com.everest.airline.model.FlightClassView;
-import com.everest.airline.model.ClassProp;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,12 +25,12 @@ public class FilterClass {
         this.secondClass = new FlightClassView(passengers, flight.getSecondClass(), flight);
     }
 
-    public Map<String, ClassProp> classTypeMap() {
-        Map<String, ClassProp> flightClassMap = new HashMap<>();
-        flightClassMap.put(ClassType.ECONOMIC.getString(), new ClassProp("economic_seats_avaliable", economic));
-        flightClassMap.put(ClassType.FIRSTCLASS.getString(), new ClassProp("firstclass_seats_avaliable", firstClass));
-        flightClassMap.put(ClassType.SECONDCLASS.getString(), new ClassProp("secondclass_seats_avaliable", secondClass));
-        return flightClassMap;
+    public ClassProp classTypeMap() {
+        Map<ClassType, ClassProp> flightClassMap = new HashMap<>();
+        flightClassMap.put(ClassType.ECONOMIC, new ClassProp(ClassType.ECONOMIC.getString(), economic));
+        flightClassMap.put(ClassType.FIRSTCLASS, new ClassProp(ClassType.FIRSTCLASS.getString(), firstClass));
+        flightClassMap.put(ClassType.SECONDCLASS, new ClassProp(ClassType.SECONDCLASS.getString(), secondClass));
+        return flightClassMap.get(ClassType.valueOf(flightClass));
     }
 
 }
