@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -7,16 +7,31 @@
 </head>
 <body>
     <h1>Airline application</h1>
-    <form action="#" th:action="@{/search}" th:object="${searchForm}" method="post">
-        <label for="from">From</label>
+    <form action="#" th:action="@{/search}" th:object="${searchForm}" th:method="post" method="post">
+        <label for="from">From </label>
         <input id="from" name="from" required="required" />
         <br />
         <br />
-        <label for="to">To</label>
+        <label for="to">To </label>
         <input id="to" name="to" required="required" />
         <br/>
         <br />
-        <input id="departureDate" type="date" required="required" name="departureDate"/>
+        <label for="Date">Date </label>
+        <input id="Date" type="date" required="required" name="departureDate"/>
+        <br/>
+        <br />
+        <label for="noOfPass">Number of Passengers</label>
+        <td><input type="number" min="0" id="noOfPass" name="noOfPass"/></td>
+        <br/>
+        <br />
+        <label for="flightClass">Select Class</label>
+        <td><select name="flightClass" id="flightClass">
+            <option value="economic">Economic Class</option>
+            <option value="firstClass">First class</option>
+            <option value="secondClass">Second class</option>
+        </select></td>
+        <br/>
+        <br />
         <input type="submit" value="Search" />
     </form>
 </body>

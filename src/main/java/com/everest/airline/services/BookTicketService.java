@@ -1,60 +1,30 @@
 package com.everest.airline.services;
 
-import com.everest.airline.database.DataParser;
-import com.everest.airline.model.FilterClass;
+import com.everest.airline.database.DataReader;
 import com.everest.airline.model.Flight;
+import com.everest.airline.actionfilters.FilterClass;
+import com.everest.airline.model.ClassProp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class BookTicketService {
 
     @Autowired
-    public FilterClass filterClass;
-
-    private List<Flight> flightList;
-
-
-    public void bookLogic(int i, String noOfPass, Long number, String flightClass) {
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(DataParser.multiFileReader()[i]));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] strings = line.split(",", -1);
-                if (number.equals(Long.parseLong(strings[0]))) {
-                    flightList.add(new Flight(Long.parseLong(strings[0]), strings[1], strings[2], LocalDate.parse(strings[3]), LocalTime.parse(strings[4]), LocalDate.parse(strings[5]), LocalTime.parse(strings[6]), Integer.parseInt(strings[7]),Integer.parseInt(strings[8]),Integer.parseInt(strings[9]),Integer.parseInt(strings[10]),Double.parseDouble(strings[11])));
-                    line = filterClass.filterFlightClass(flightClass, strings, line, noOfPass, flightList, number);
-                }
-                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(DataParser.multiFileReader()[i]));
-                bufferedWriter.write(line);
-                bufferedWriter.close();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    private DataReader dataReader;
 
     public List<Flight> bookTicket(String noOfPass, Long number, String flightClass) {
-        if (DataParser.multiFileReader() != null) {
-            flightList=new ArrayList<>();
-            isContainFile(noOfPass, number, flightClass);
-        }
-        return flightList;
-    }
-
-    public void isContainFile(String noOfPass, Long number, String flightClass) {
-        for (int i = 1; i < DataParser.multiFileReader().length; i++) {
-            if (DataParser.multiFileReader()[i].isFile()) {
-                bookLogic(i, noOfPass, number, flightClass);
-            }
-        }
+        return dataReader.getAllFlights()
+                .stream().filter(flight -> flight.getNumber() == number)
+                .peek(flight -> {
+                   FilterClass filterClass= new FilterClass(noOfPass,flight,flightClass);
+                   ClassProp classProp = filterClass.classTypeMap();
+                   classProp.getFlightClassView().updateSeats(classProp.getDbColumnName());
+                })
+                .collect(Collectors.toList());
     }
 
 }
